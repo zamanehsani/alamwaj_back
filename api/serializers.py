@@ -21,6 +21,6 @@ class LaunchSerializer(serializers.HyperlinkedModelSerializer):
 class VesselSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Vessel
-        fields = ['url','date','captain','captainNumber',
-                  'owner','ownerNumber','sourcePort','sourceDestination',
-                  'status','agenty','file','launch', 'getBalance']
+        fields = ['pk','url','date','captain','captainNumber',
+                  'owner','ownerNumber','sourcePort','DestinationPort',
+                  'status','agenty','file','launch', 'getBalance','getLaunchNumber']

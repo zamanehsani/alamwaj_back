@@ -23,7 +23,7 @@ class Vessel(models.Model):
     ownerNumber = models.CharField(max_length=15)
     date = models.DateTimeField(auto_created=True, auto_now_add=True)
     sourcePort = models.CharField(max_length=30, null=True,blank=True)
-    sourceDestination = models.CharField(max_length=30, null=True,blank=True)
+    DestinationPort = models.CharField(max_length=30, null=True,blank=True)
     status = models.CharField(max_length=30, null=True,blank=True)
     agenty = models.DecimalField(max_digits=8, decimal_places=2, null=True,blank=True)
     file = models.FileField(upload_to='vessels/', null=True,blank=True)
@@ -40,4 +40,5 @@ class Vessel(models.Model):
     # get the balance
     def getBalance(self, *args, **kwargs):
         return self.agenty
-    
+    def getLaunchNumber(self, *args, **kwargs):
+        return self.launch.number
