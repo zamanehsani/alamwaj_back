@@ -3,8 +3,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers, viewsets
 from api import serializers, models
 
-# Create your views here.
-# ViewSets define the view behavior.
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = serializers.UserSerializer
@@ -12,7 +11,6 @@ class UserViewSet(viewsets.ModelViewSet):
 class USRViewSet(viewsets.ModelViewSet):
     queryset = models.Usr.objects.all()
     serializer_class = serializers.USRSerializer
-
 
 
 class LaunchViewSet(viewsets.ModelViewSet):
