@@ -15,7 +15,7 @@ class USRSerializer(serializers.HyperlinkedModelSerializer):
 class LaunchSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Launch
-        fields = '__all__'
+        fields = ['pk', 'url', 'number', 'owner', 'ownerNumber']
 
 
 class VesselSerializer(serializers.HyperlinkedModelSerializer):
