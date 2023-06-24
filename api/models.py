@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 class Usr(models.Model):
@@ -15,18 +16,26 @@ class Launch(models.Model):
     def __str__(self):
         return self.number
 
+
+def generate_file_path(instance, filename):
+    timestamp = timezone.now().strftime('%d%m%Y')
+    launch_number = instance.launch.number
+    filename = f"{timestamp}-{launch_number}"
+    return f"vessels/{filename}"
+    
+
 class Vessel(models.Model):
     launch = models.ForeignKey(Launch,on_delete=models.CASCADE)
     captain = models.CharField(max_length=30)
     captainNumber = models.CharField(max_length=15)
-    owner = models.CharField(max_length=30)
-    ownerNumber = models.CharField(max_length=15)
+    owner = models.CharField(max_length=30,null=True,blank=True)
+    ownerNumber = models.CharField(max_length=15,null=True,blank=True)
     date = models.DateTimeField(auto_created=True, auto_now_add=True)
     sourcePort = models.CharField(max_length=30, null=True,blank=True)
     DestinationPort = models.CharField(max_length=30, null=True,blank=True)
     status = models.CharField(max_length=30, null=True,blank=True)
     agenty = models.DecimalField(max_digits=8, decimal_places=2, null=True,blank=True)
-    file = models.FileField(upload_to='vessels/', null=True,blank=True)
+    file = models.FileField(upload_to=generate_file_path, null=True,blank=True)
 
     def __str__(self):
         return self.launch.number
@@ -37,8 +46,10 @@ class Vessel(models.Model):
         self.ownerNumber = launch.ownerNumber  # Set ownerNumber from Launch ownerNumber
         super().save(*args, **kwargs)  # Call the original save method
 
+
     # get the balance
     def getBalance(self, *args, **kwargs):
         return self.agenty
     def getLaunchNumber(self, *args, **kwargs):
         return self.launch.number
+    

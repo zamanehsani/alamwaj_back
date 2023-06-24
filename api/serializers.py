@@ -19,8 +19,19 @@ class LaunchSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class VesselSerializer(serializers.HyperlinkedModelSerializer):
+    file = serializers.FileField(required=False)
     class Meta:
         model = models.Vessel
         fields = ['pk','url','date','captain','captainNumber',
                   'owner','ownerNumber','sourcePort','DestinationPort',
                   'status','agenty','file','launch', 'getBalance','getLaunchNumber']
+
+    def create(self, validated_data):
+        file = validated_data.pop('file', None)
+        vessel = super().create(validated_data)
+
+        if file:
+            vessel.file = file
+            vessel.save()
+
+        return vessel
