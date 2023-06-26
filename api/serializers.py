@@ -29,9 +29,26 @@ class VesselSerializer(serializers.HyperlinkedModelSerializer):
     def create(self, validated_data):
         file = validated_data.pop('file', None)
         vessel = super().create(validated_data)
-
         if file:
             vessel.file = file
             vessel.save()
 
         return vessel
+    
+    
+class VesselParkingSerializer(serializers.HyperlinkedModelSerializer):
+    file = serializers.FileField(required=False)
+    class Meta:
+        model = models.VesselParking
+        fields = ['pk','url','days','amount',
+                  'vessel','done_by','note','file', 'getExtraParking','date', 'getDoneByName']
+
+    def create(self, validated_data):
+        file = validated_data.pop('file', None)
+        parking = super().create(validated_data)
+
+        if file:
+            parking.file = file
+            parking.save()
+
+        return parking

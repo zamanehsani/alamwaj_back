@@ -14,6 +14,10 @@ router.register(r'users', views.UserViewSet)
 router.register(r'usr', views.USRViewSet)
 router.register(r'launches', views.LaunchViewSet)
 router.register(r'vessels', views.VesselViewSet)
+router.register(r'parkings', views.ParkingViewSet)
+# Register the main viewset
+router.register(r'vessel/parking', views.VesselParkingViewSet)
+
 urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),

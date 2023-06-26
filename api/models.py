@@ -21,7 +21,7 @@ def generate_file_path(instance, filename):
     timestamp = timezone.now().strftime('%d%m%Y')
     launch_number = instance.launch.number
     filename = f"{timestamp}-{launch_number}"
-    return f"vessels/{filename}"
+    return f"vessels/{filename}/{filename}"
     
 
 class Vessel(models.Model):
@@ -53,3 +53,32 @@ class Vessel(models.Model):
     def getLaunchNumber(self, *args, **kwargs):
         return self.launch.number
     
+
+def generate_file_path(instance, filename):
+    timestamp = timezone.now().strftime('%d%m%Y')
+    launch_number = instance.vessel
+    filename = f"{timestamp}-{launch_number}"
+    return f"vessels/{filename}/parking"
+
+class VesselParking(models.Model):
+    vessel = models.ForeignKey(Vessel,on_delete=models.CASCADE)
+    days = models.PositiveSmallIntegerField()
+    amount = models.DecimalField(max_digits=8, decimal_places=2)
+    date = models.DateTimeField(auto_created=True, auto_now_add=True)
+    done_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    file = models.FileField(upload_to=generate_file_path, null=True,blank=True)
+    note = models.TextField(null=True,blank=True)
+
+    def __str__(self):
+        return self.vessel.launch.number
+    
+
+    # get the balance
+    def getExtraParking(self, *args, **kwargs): 
+        # amount / days = one day and one day * (days-3)
+        if self.days <= 3:
+            return 0
+        return int((self.amount / self.days) * ( self.days - 3))
+    
+    def getDoneByName(self, *args, **kwargs):
+        return self.done_by.username
