@@ -4,9 +4,48 @@ from rest_framework import serializers, viewsets
 from api import serializers, models
 from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
+from django.http import JsonResponse
 from rest_framework import status
+from django.views.decorators.csrf import csrf_exempt
 
 
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+
+
+class LaunchSearchViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.LaunchSerializer
+    queryset = models.Launch.objects.all()
+
+    def get_queryset(self):
+        queryset = models.Launch.objects.all()
+        vessel_id = self.request.query_params.get('number')  # Get the vessel ID from query parameters
+        if vessel_id:
+            # Filter the queryset based on the vessel ID
+            queryset = queryset.filter(number__contains=vessel_id)
+            return queryset
+        return []
+    
+@csrf_exempt
+@permission_classes([IsAuthenticated])
+def getUserDetails(request):
+    if request.method == 'POST':
+        username = request.POST.get("username")
+        # Retrieve user from User model using the username
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return JsonResponse({'error': 'User not found'}, status=404)
+
+        # Serialize user object
+        serializer = serializers.UserDetailsSerializer(user)
+
+        # Return serialized object as JSON response
+        return JsonResponse(serializer.data)
+    else:
+        return JsonResponse({'error': 'Invalid request method'}, status=400)
+    
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = serializers.UserSerializer
@@ -15,6 +54,7 @@ class USRViewSet(viewsets.ModelViewSet):
     queryset = models.Usr.objects.all()
     serializer_class = serializers.USRSerializer
 
+ 
 
 class LaunchViewSet(viewsets.ModelViewSet):
     queryset = models.Launch.objects.all()
@@ -32,6 +72,7 @@ class VesselViewSet(viewsets.ModelViewSet):
 
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
     
 class ParkingViewSet(viewsets.ModelViewSet):
     queryset = models.VesselParking.objects.all()
@@ -46,7 +87,6 @@ class ParkingViewSet(viewsets.ModelViewSet):
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
-
 class VesselParkingViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.VesselParkingSerializer
     queryset = models.VesselParking.objects.all()
@@ -60,3 +100,248 @@ class VesselParkingViewSet(viewsets.ModelViewSet):
             return queryset
         return []
     
+
+class ExitViewSet(viewsets.ModelViewSet):
+    queryset = models.VesselExit.objects.all()
+    serializer_class = serializers.VesselExitSerializer
+    parser_classes = [MultiPartParser]
+    
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+class VesselExitViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselExitSerializer
+    queryset = models.VesselExit.objects.all()
+
+    def get_queryset(self):
+        queryset = models.VesselExit.objects.all()
+        vessel_id = self.request.query_params.get('vessel_id')  # Get the vessel ID from query parameters
+        if vessel_id:
+            # Filter the queryset based on the vessel ID
+            queryset = queryset.filter(vessel=vessel_id)
+            return queryset
+        return []
+    
+    
+class TrueCopyViewSet(viewsets.ModelViewSet):
+    queryset = models.VesselTrueCopy.objects.all()
+    serializer_class = serializers.VesselTrueCopySerializer
+    parser_classes = [MultiPartParser]
+    
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+class VesselTrueCopyViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselTrueCopySerializer
+    queryset = models.VesselExit.objects.all()
+
+    def get_queryset(self):
+        queryset = models.VesselTrueCopy.objects.all()
+        vessel_id = self.request.query_params.get('vessel_id')  # Get the vessel ID from query parameters
+        if vessel_id:
+            # Filter the queryset based on the vessel ID
+            queryset = queryset.filter(vessel=vessel_id)
+            return queryset
+        return []
+    
+class ManifestViewSet(viewsets.ModelViewSet):
+    queryset = models.VesselManifest.objects.all()
+    serializer_class = serializers.VesselManifestSerializer
+    parser_classes = [MultiPartParser]
+    
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+class VesselManifestViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselManifestSerializer
+    queryset = models.VesselManifest.objects.all()
+
+    def get_queryset(self):
+        queryset = models.VesselManifest.objects.all()
+        vessel_id = self.request.query_params.get('vessel_id')  # Get the vessel ID from query parameters
+        if vessel_id:
+            # Filter the queryset based on the vessel ID
+            queryset = queryset.filter(vessel=vessel_id)
+            return queryset
+        return []
+    
+class AttestationViewSet(viewsets.ModelViewSet):
+    queryset = models.VesselAttestation.objects.all()
+    serializer_class = serializers.VesselAttestationSerializer
+    parser_classes = [MultiPartParser]
+    
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+class VesselAttestationViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselAttestationSerializer
+    queryset = models.VesselAttestation.objects.all()
+
+    def get_queryset(self):
+        queryset = models.VesselAttestation.objects.all()
+        vessel_id = self.request.query_params.get('vessel_id')  # Get the vessel ID from query parameters
+        if vessel_id:
+            # Filter the queryset based on the vessel ID
+            queryset = queryset.filter(vessel=vessel_id)
+            return queryset
+        return []
+    
+class AmendViewSet(viewsets.ModelViewSet):
+    queryset = models.VesselAmend.objects.all()
+    serializer_class = serializers.VesselAmendSerializer
+    parser_classes = [MultiPartParser]
+    
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+class VesselAmendViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselAmendSerializer
+    queryset = models.VesselAmend.objects.all()
+
+    def get_queryset(self):
+        queryset = models.VesselAmend.objects.all()
+        vessel_id = self.request.query_params.get('vessel_id')  # Get the vessel ID from query parameters
+        if vessel_id:
+            # Filter the queryset based on the vessel ID
+            queryset = queryset.filter(vessel=vessel_id)
+            return queryset
+        return []
+    
+class HamaliListViewSet(viewsets.ModelViewSet):
+    queryset = models.Usr.objects.all()
+    serializer_class = serializers.USRSerializer
+    def get_queryset(self):
+        queryset = models.Usr.objects.all()
+        hamal = self.request.query_params.get('type')  # Get the vessel ID from query parameters
+        if hamal:
+            # Filter the queryset based on the vessel ID
+            queryset = queryset.filter(type=hamal)
+            return queryset
+        # if nothing is giving in the url params; return all the usr lists
+        return queryset
+   
+
+# general hamal list
+class HamaliViewSet(viewsets.ModelViewSet):
+    queryset = models.VesselHamali.objects.all()
+    serializer_class = serializers.VesselHamaliSerializer
+    parser_classes = [MultiPartParser]
+    
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    
+    # gets the hamali based on vessels
+class VesselHamaliViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselHamaliSerializer
+    queryset = models.VesselHamali.objects.all()
+
+    def get_queryset(self):
+        queryset = models.VesselHamali.objects.all()
+        vessel_id = self.request.query_params.get('vessel_id')  # Get the vessel ID from query parameters
+        if vessel_id:
+            # Filter the queryset based on the vessel ID
+            queryset = queryset.filter(vessel=vessel_id)
+            return queryset
+        return []
+    
+    # gets hamal based on user pk
+
+class UserHamaliViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselHamaliSerializer
+    queryset = models.VesselHamali.objects.all()
+
+    def get_queryset(self):
+        queryset = models.VesselHamali.objects.all()
+        hamal = self.request.query_params.get('hamal')  # Get the vessel ID from query parameters
+        if hamal:
+            # Filter the queryset based on the vessel ID
+            queryset = queryset.filter(hamal=hamal, is_paid = False)
+            return queryset
+        return []
+    
+
+class AccountViewSet(viewsets.ModelViewSet):
+    queryset = models.VesselAccount.objects.all()
+    serializer_class = serializers.VesselAccountSerializer
+    parser_classes = [MultiPartParser]
+    
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+    
+class VesselAccountViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselAccountSerializer
+    queryset = models.VesselAccount.objects.all()
+
+    def get_queryset(self):
+        queryset = models.VesselAccount.objects.all()
+        vessel_id = self.request.query_params.get('vessel_id')  # Get the vessel ID from query parameters
+        if vessel_id:
+            # Filter the queryset based on the vessel ID
+            queryset = queryset.filter(vessel=vessel_id)
+            return queryset
+        return []
+    
+
+    # this is vessel expenses 
+
+class ExpenseViewSet(viewsets.ModelViewSet):
+    queryset = models.VesselExpenses.objects.all()
+    serializer_class = serializers.VesselExpenseSerializer
+    parser_classes = [MultiPartParser]
+    
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+    
+class VesselExpensesViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselExpenseSerializer
+    queryset = models.VesselExpenses.objects.all()
+
+    def get_queryset(self):
+        queryset = models.VesselExpenses.objects.all()
+        vessel_id = self.request.query_params.get('vessel_id')  # Get the vessel ID from query parameters
+        if vessel_id:
+            # Filter the queryset based on the vessel ID
+            queryset = queryset.filter(vessel=vessel_id)
+            return queryset
+        return []

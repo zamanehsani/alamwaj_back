@@ -5,12 +5,17 @@ from api import models
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'email', 'is_staff', 'is_active']
+        fields = ['first_name', 'last_name', 'username', 'email','url', 'is_staff', 'is_active']
+
+class UserDetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'username', 'email','pk']
 
 class USRSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Usr
-        fields = '__all__'
+        fields = ['pk', 'type', 'url', 'getUsername', 'user', 'getEmail', 'getUserPK']
 
 class LaunchSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -22,9 +27,10 @@ class VesselSerializer(serializers.HyperlinkedModelSerializer):
     file = serializers.FileField(required=False)
     class Meta:
         model = models.Vessel
-        fields = ['pk','url','date','captain','captainNumber',
-                  'owner','ownerNumber','sourcePort','DestinationPort',
-                  'status','agenty','file','launch', 'getBalance','getLaunchNumber']
+        fields = ['pk','url','date','captain','captainNumber', 'get_balance',
+                  'total_manifestation', 'total_expenses','get_extra_parking','get_profit',
+                  'owner','ownerNumber','sourcePort','DestinationPort', 'total_receivees',
+                  'status','agenty','file','launch', 'getTotalBalance','getLaunchNumber']
 
     def create(self, validated_data):
         file = validated_data.pop('file', None)
@@ -52,3 +58,129 @@ class VesselParkingSerializer(serializers.HyperlinkedModelSerializer):
             parking.save()
 
         return parking
+
+
+class VesselExitSerializer(serializers.HyperlinkedModelSerializer):
+    file = serializers.FileField(required=False)
+    class Meta:
+        model = models.VesselExit
+        fields = ['pk','url','amount',
+                  'vessel','done_by','note','file','date', 'getDoneByName']
+    def create(self, validated_data):
+        file = validated_data.pop('file', None)
+        exit = super().create(validated_data)
+
+        if file:
+            exit.file = file
+            exit.save()
+
+        return exit
+    
+
+class VesselTrueCopySerializer(serializers.HyperlinkedModelSerializer):
+    file = serializers.FileField(required=False)
+    class Meta:
+        model = models.VesselTrueCopy
+        fields = ['pk','url','amount',
+                  'vessel','done_by','note','file','date', 'getDoneByName']
+    def create(self, validated_data):
+        file = validated_data.pop('file', None)
+        truecopy = super().create(validated_data)
+
+        if file:
+            truecopy.file = file
+            truecopy.save()
+        return truecopy
+    
+    
+class VesselAttestationSerializer(serializers.HyperlinkedModelSerializer):
+    file = serializers.FileField(required=False)
+    class Meta:
+        model = models.VesselAttestation
+        fields = ['pk','url','amount',
+                  'vessel','done_by','note','file','date', 'getDoneByName']
+    def create(self, validated_data):
+        file = validated_data.pop('file', None)
+        attest = super().create(validated_data)
+
+        if file:
+            attest.file = file
+            attest.save()
+        return attest
+    
+class VesselAmendSerializer(serializers.HyperlinkedModelSerializer):
+    file = serializers.FileField(required=False)
+    class Meta:
+        model = models.VesselAmend
+        fields = ['pk','url','amount',
+                  'vessel','done_by','note','file','date', 'getDoneByName']
+    def create(self, validated_data):
+        file = validated_data.pop('file', None)
+        amend = super().create(validated_data)
+
+        if file:
+            amend.file = file
+            amend.save()
+        return amend
+    
+class VesselManifestSerializer(serializers.HyperlinkedModelSerializer):
+    file = serializers.FileField(required=False)
+    class Meta:
+        model = models.VesselManifest
+        fields = ['pk','url','amount',
+                  'vessel','done_by','note','file','date', 'getDoneByName']
+    def create(self, validated_data):
+        file = validated_data.pop('file', None)
+        manifest = super().create(validated_data)
+
+        if file:
+            manifest.file = file
+            manifest.save()
+        return manifest
+    
+    
+class VesselHamaliSerializer(serializers.HyperlinkedModelSerializer):
+    file = serializers.FileField(required=False)
+    class Meta:
+        model = models.VesselHamali
+        fields = ['pk','url','hamal','hamal_loaded','container','ctn_fees',
+                  'getHamalFees', 'getHamalName', 'is_paid', 'paid_amount',
+                  'vessel','done_by','note','file','date', 'getDoneByName', 'getVesselNumber']
+    def create(self, validated_data):
+        file = validated_data.pop('file', None)
+        hamal = super().create(validated_data)
+        
+        if file:
+            hamal.file = file
+            hamal.save()
+        return hamal
+    
+class VesselAccountSerializer(serializers.HyperlinkedModelSerializer):
+    file = serializers.FileField(required=False)
+    class Meta:
+        model = models.VesselAccount
+        fields = ['pk','url','note','file','date', 'amount',
+                  'vessel','done_by', 'getDoneByName', 'getVesselNumber']
+    def create(self, validated_data):
+        file = validated_data.pop('file', None)
+        hamal = super().create(validated_data)
+        
+        if file:
+            hamal.file = file
+            hamal.save()
+
+class VesselExpenseSerializer(serializers.HyperlinkedModelSerializer):
+    file = serializers.FileField(required=False)
+    class Meta:
+        model = models.VesselExpenses
+        fields = ['pk','url','note','file','date', 'amount',
+                  'vessel','done_by', 'getDoneByName', 'getVesselNumber']
+    def create(self, validated_data):
+        file = validated_data.pop('file', None)
+        hamal = super().create(validated_data)
+        
+        if file:
+            hamal.file = file
+            hamal.save()
+        return hamal
+    
