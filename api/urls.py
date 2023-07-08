@@ -46,6 +46,9 @@ router.register(r'expenses', views.ExpenseViewSet)
 router.register(r'vessel/expense', views.VesselExpensesViewSet)
 
 router.register(r'launch-search', views.LaunchSearchViewSet)
+router.register(r'user-expense', views.UserExpenseViewSet)
+router.register(r'user-receive', views.UserReceiveViewSet)
+# router.register(r'parking-month-view', views.ParkingMonthView)
 
 
 urlpatterns = [
@@ -56,7 +59,16 @@ urlpatterns = [
     path('user-details/', views.getUserDetails, name='user-details'),
     path('hamali-details/', views.UserHamaliViewSet.as_view({'get':'list'}), name='hamali-user'),
     path('hamali-list/', views.HamaliListViewSet.as_view({'get':'list'}), name='hmali-list'),
-    # path('hamals/', views.HamaliViewSet.as_view({'get':'list'}), name='hamali-all'),
     path('vessel/hamal/', views.VesselHamaliViewSet.as_view({'get':'list'}), name='vessel-hamali'),
 
+    path('parking-month/', views.ParkingMonthView.as_view({'get':'list'}), name='parking_month'),
+    path('exit-month/', views.ExitMonthView.as_view({'get':'list'}), name='exit_month'),
+    path('attest-month/', views.AttestationMonthView.as_view({'get':'list'}), name='attest_month'),
+    path('true-copy-month/', views.TrueCopyMonthView.as_view({'get':'list'}), name='true_copy_month'),
+    path('amend-month/', views.AmendMonthView.as_view({'get':'list'}), name='amend_month'),
+    path('expense-month/', views.ExpensesMonthView.as_view({'get':'list'}), name='expense_month'),
+    path('vessel-account-month/', views.VesselAccountMonth.as_view({'get':'list'}), name='vessel_account_month'),
+    path('user-expense-month/', views.UserExpenseMonth.as_view({'get':'list'}), name='vessel_expense_month'),
+    path('user-receive-month/', views.UserReceiveMonth.as_view({'get':'list'}), name='user_receive_month'),
+    path('launch-vessel-list/', views.LaunchVesselList.as_view({'get':'list'}), name='launch_vessel_list'),
 ]

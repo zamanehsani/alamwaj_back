@@ -30,7 +30,7 @@ class VesselSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['pk','url','date','captain','captainNumber', 'get_balance',
                   'total_manifestation', 'total_expenses','get_extra_parking','get_profit',
                   'owner','ownerNumber','sourcePort','DestinationPort', 'total_receivees',
-                  'status','agenty','file','launch', 'getTotalBalance','getLaunchNumber']
+                  'status','agenty','file','launch', 'getTotalBalance','getLaunchNumber','mathrahani']
 
     def create(self, validated_data):
         file = validated_data.pop('file', None)
@@ -163,11 +163,12 @@ class VesselAccountSerializer(serializers.HyperlinkedModelSerializer):
                   'vessel','done_by', 'getDoneByName', 'getVesselNumber']
     def create(self, validated_data):
         file = validated_data.pop('file', None)
-        hamal = super().create(validated_data)
+        acc = super().create(validated_data)
         
         if file:
-            hamal.file = file
-            hamal.save()
+            acc.file = file
+            acc.save()
+        return acc
 
 class VesselExpenseSerializer(serializers.HyperlinkedModelSerializer):
     file = serializers.FileField(required=False)
@@ -175,6 +176,36 @@ class VesselExpenseSerializer(serializers.HyperlinkedModelSerializer):
         model = models.VesselExpenses
         fields = ['pk','url','note','file','date', 'amount',
                   'vessel','done_by', 'getDoneByName', 'getVesselNumber']
+    def create(self, validated_data):
+        file = validated_data.pop('file', None)
+        hamal = super().create(validated_data)
+        
+        if file:
+            hamal.file = file
+            hamal.save()
+        return hamal
+    
+class UserExpenseSerializer(serializers.HyperlinkedModelSerializer):
+    file = serializers.FileField(required=False)
+    class Meta:
+        model = models.UserExpenseAccount
+        fields = ['pk','url','note','file','date', 'amount','done_by', 'getDoneByName', ]
+        
+    def create(self, validated_data):
+        file = validated_data.pop('file', None)
+        hamal = super().create(validated_data)
+        
+        if file:
+            hamal.file = file
+            hamal.save()
+        return hamal
+    
+class UserReceiveSerializer(serializers.HyperlinkedModelSerializer):
+    file = serializers.FileField(required=False)
+    class Meta:
+        model = models.UserReceiveAccount
+        fields = ['pk','url','note','file','date', 'amount','done_by', 'getDoneByName', ]
+
     def create(self, validated_data):
         file = validated_data.pop('file', None)
         hamal = super().create(validated_data)

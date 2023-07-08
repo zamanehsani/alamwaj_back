@@ -7,6 +7,9 @@ from rest_framework.response import Response
 from django.http import JsonResponse
 from rest_framework import status
 from django.views.decorators.csrf import csrf_exempt
+from datetime import datetime
+from django.db.models import Q
+from django.utils import timezone
 
 
 from rest_framework.decorators import permission_classes
@@ -55,7 +58,6 @@ class USRViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.USRSerializer
 
  
-
 class LaunchViewSet(viewsets.ModelViewSet):
     queryset = models.Launch.objects.all()
     serializer_class = serializers.LaunchSerializer
@@ -343,5 +345,193 @@ class VesselExpensesViewSet(viewsets.ModelViewSet):
         if vessel_id:
             # Filter the queryset based on the vessel ID
             queryset = queryset.filter(vessel=vessel_id)
+            return queryset
+        return []
+    
+class ParkingMonthView(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselParkingSerializer
+    queryset = models.VesselParking.objects.all()
+
+    def get_queryset(self):
+        queryset = self.queryset
+        if self.request.query_params.get('usr'):
+            queryset = queryset.filter(done_by=self.request.query_params.get('usr'))
+        if self.request.query_params.get('yr'):
+            queryset = queryset.filter(date__year = self.request.query_params.get('yr'))
+        if self.request.query_params.get('mth') :
+            queryset = queryset.filter(date__month = self.request.query_params.get('mth'))
+            
+        return queryset
+    
+class ManifestMonthView(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselManifestSerializer
+    queryset = models.VesselManifest.objects.all()
+
+    def get_queryset(self):
+        queryset = self.queryset
+        if self.request.query_params.get('usr'):
+            queryset = queryset.filter(done_by=self.request.query_params.get('usr'))
+        if self.request.query_params.get('yr'):
+            queryset = queryset.filter(date__year = self.request.query_params.get('yr'))
+        if self.request.query_params.get('mth') :
+            queryset = queryset.filter(date__month = self.request.query_params.get('mth'))
+
+        return queryset
+    
+class ExitMonthView(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselExitSerializer
+    queryset = models.VesselExit.objects.all()
+
+    def get_queryset(self):
+        queryset = self.queryset
+        if self.request.query_params.get('usr'):
+            queryset = queryset.filter(done_by=self.request.query_params.get('usr'))
+        if self.request.query_params.get('yr'):
+            queryset = queryset.filter(date__year = self.request.query_params.get('yr'))
+        if self.request.query_params.get('mth') :
+            queryset = queryset.filter(date__month = self.request.query_params.get('mth'))
+
+        return queryset
+    
+class AttestationMonthView(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselAttestationSerializer
+    queryset = models.VesselAttestation.objects.all()
+
+    def get_queryset(self):
+        queryset = self.queryset
+        if self.request.query_params.get('usr'):
+            queryset = queryset.filter(done_by=self.request.query_params.get('usr'))
+        if self.request.query_params.get('yr'):
+            queryset = queryset.filter(date__year = self.request.query_params.get('yr'))
+        if self.request.query_params.get('mth') :
+            queryset = queryset.filter(date__month = self.request.query_params.get('mth'))
+
+        return queryset
+    
+class AmendMonthView(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselAmendSerializer
+    queryset = models.VesselAmend.objects.all()
+
+    def get_queryset(self):
+        queryset = self.queryset
+        if self.request.query_params.get('usr'):
+            queryset = queryset.filter(done_by=self.request.query_params.get('usr'))
+        if self.request.query_params.get('yr'):
+            queryset = queryset.filter(date__year = self.request.query_params.get('yr'))
+        if self.request.query_params.get('mth') :
+            queryset = queryset.filter(date__month = self.request.query_params.get('mth'))
+
+        return queryset
+    
+class TrueCopyMonthView(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselTrueCopySerializer
+    queryset = models.VesselTrueCopy.objects.all()
+
+    def get_queryset(self):
+        queryset = self.queryset
+        if self.request.query_params.get('usr'):
+            queryset = queryset.filter(done_by=self.request.query_params.get('usr'))
+        if self.request.query_params.get('yr'):
+            queryset = queryset.filter(date__year = self.request.query_params.get('yr'))
+        if self.request.query_params.get('mth') :
+            queryset = queryset.filter(date__month = self.request.query_params.get('mth'))
+
+        return queryset
+    
+class ExpensesMonthView(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselExpenseSerializer
+    queryset = models.VesselExpenses.objects.all()
+
+    def get_queryset(self):
+        queryset = self.queryset
+        if self.request.query_params.get('usr'):
+            queryset = queryset.filter(done_by=self.request.query_params.get('usr'))
+        if self.request.query_params.get('yr'):
+            queryset = queryset.filter(date__year = self.request.query_params.get('yr'))
+        if self.request.query_params.get('mth') :
+            queryset = queryset.filter(date__month = self.request.query_params.get('mth'))
+
+        return queryset
+    
+class VesselAccountMonth(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselAccountSerializer
+    queryset = models.VesselAccount.objects.all()
+
+    def get_queryset(self):
+        queryset = self.queryset
+        if self.request.query_params.get('usr'):
+            queryset = queryset.filter(done_by=self.request.query_params.get('usr'))
+        if self.request.query_params.get('yr'):
+            queryset = queryset.filter(date__year = self.request.query_params.get('yr'))
+        if self.request.query_params.get('mth') :
+            queryset = queryset.filter(date__month = self.request.query_params.get('mth'))
+
+        return queryset
+    
+class UserExpenseViewSet(viewsets.ModelViewSet):
+    queryset = models.UserExpenseAccount.objects.all()
+    serializer_class = serializers.UserExpenseSerializer
+    parser_classes = [MultiPartParser]
+    
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+    
+    
+class UserReceiveViewSet(viewsets.ModelViewSet):
+    queryset = models.UserReceiveAccount.objects.all()
+    serializer_class = serializers.UserReceiveSerializer
+    parser_classes = [MultiPartParser]
+    
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+    
+
+class UserExpenseMonth(viewsets.ModelViewSet):
+    serializer_class = serializers.UserExpenseSerializer
+    queryset = models.UserExpenseAccount.objects.all()
+
+    def get_queryset(self):
+        queryset = self.queryset
+        if self.request.query_params.get('usr'):
+            queryset = queryset.filter(done_by=self.request.query_params.get('usr'))
+        if self.request.query_params.get('yr'):
+            queryset = queryset.filter(date__year = self.request.query_params.get('yr'))
+        if self.request.query_params.get('mth') :
+            queryset = queryset.filter(date__month = self.request.query_params.get('mth'))
+
+        return queryset
+    
+class UserReceiveMonth(viewsets.ModelViewSet):
+    serializer_class = serializers.UserReceiveSerializer
+    queryset = models.UserReceiveAccount.objects.all()
+
+    def get_queryset(self):
+        queryset = self.queryset
+        if self.request.query_params.get('usr'):
+            queryset = queryset.filter(done_by=self.request.query_params.get('usr'))
+        if self.request.query_params.get('yr'):
+            queryset = queryset.filter(date__year = self.request.query_params.get('yr'))
+        if self.request.query_params.get('mth') :
+            queryset = queryset.filter(date__month = self.request.query_params.get('mth'))
+
+        return queryset
+    
+class LaunchVesselList(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselSerializer
+    queryset = models.Vessel.objects.all()
+    def get_queryset(self):
+        queryset = self.queryset
+        if self.request.query_params.get('launch'):
+            queryset = queryset.filter(launch__pk=self.request.query_params.get('launch'))
             return queryset
         return []
