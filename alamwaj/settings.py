@@ -18,7 +18,7 @@ import dotenv
 # Load environment variables from .env file
 dotenv.load_dotenv()
 
-print(os.getenv('SECRET_KEY'))
+print("this is printed from settings. it means that the django config is loaded in the settings.")
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -31,7 +31,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.alamwaj.ae']
 
 
 # Application definition
@@ -88,15 +88,21 @@ WSGI_APPLICATION = 'alamwaj.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.getenv('DB_NAME'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'USERNAME': os.getenv('DB_USERNAME'),
+        'HOST': os.getenv('DB_ENDPOINT'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
 CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:3000',  
-    'http://192.168.70.161:3000',  
     'http://alamwaj.ae',
+    'http://www.alamwaj.ae',
     'https://alamwaj.ae',
+    'https://www.alamwaj.ae',
 ]
 
 CORS_ALLOW_HEADERS = ['*']
