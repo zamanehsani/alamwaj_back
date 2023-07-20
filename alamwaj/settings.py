@@ -31,7 +31,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.alamwaj.ae']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1','.alamwaj-front.s3-website.me-central-1.amazonaws.com', '.alamwaj.ae']
 
 
 # Application definition
@@ -103,6 +103,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://alamwaj.ae',
     'http://www.alamwaj.ae',
     'https://alamwaj.ae',
+    'http://alamwaj-front.s3-website.me-central-1.amazonaws.com',
+    'https://alamwaj-front.s3-website.me-central-1.amazonaws.com',
     'https://www.alamwaj.ae',
 ]
 
