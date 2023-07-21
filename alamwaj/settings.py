@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+# ssh -i "new_ssh.pem" ubuntu@ec2-3-29-70-146.me-central-1.compute.amazonaws.com
+
 from pathlib import Path
 import os
 
@@ -100,12 +102,14 @@ DATABASES = {
 
 CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:3000',  
+    'http://localhost:3000',  
     'http://alamwaj.ae',
     'http://www.alamwaj.ae',
     'https://alamwaj.ae',
-    'http://alamwaj-front.s3-website.me-central-1.amazonaws.com',
-    'https://alamwaj-front.s3-website.me-central-1.amazonaws.com',
     'https://www.alamwaj.ae',
+    'http://alamwaj-front.s3-website.me-central-1.amazonaws.com',
+    'http://www.alamwaj-front.s3-website.me-central-1.amazonaws.com',
+    'https://alamwaj-front.s3-website.me-central-1.amazonaws.com',
 ]
 
 CORS_ALLOW_HEADERS = ['*']
