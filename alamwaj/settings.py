@@ -33,7 +33,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','http://3.29.70.146' ,'127.0.0.1','.alamwaj-front.s3-website.me-central-1.amazonaws.com', '.alamwaj.ae']
+ALLOWED_HOSTS = ['localhost','3.29.70.146' ,'127.0.0.1','.alamwaj-front.s3-website.me-central-1.amazonaws.com', '.alamwaj.ae']
 
 
 # Application definition
