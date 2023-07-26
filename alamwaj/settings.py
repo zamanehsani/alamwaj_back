@@ -39,6 +39,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1','.alamwaj-front.s3-website.me-central-
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,17 +48,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'api.apps.ApiConfig',
     'rest_framework',
-    'corsheaders',
     'rest_framework_simplejwt',
     'storages',
 ]
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -100,23 +100,25 @@ DATABASES = {
     }
 }
 
-CORS_ALLOWED_ORIGINS = [
-    'http://127.0.0.1:3000',  
-    'http://localhost:3000',  
-    'http://alamwaj.ae',
-    'http://www.alamwaj.ae',
-    'https://alamwaj.ae',
-    'https://www.alamwaj.ae',
-    'http://alamwaj-front.s3-website.me-central-1.amazonaws.com',
-    'http://www.alamwaj-front.s3-website.me-central-1.amazonaws.com',
-    'https://alamwaj-front.s3-website.me-central-1.amazonaws.com',
-]
+# CORS_ALLOWED_ORIGINS = [
+#     'http://127.0.0.1:3000',  
+#     'http://localhost:3000',  
+#     'http://alamwaj.ae',
+#     'http://www.alamwaj.ae',
+#     'https://alamwaj.ae',
+#     'https://www.alamwaj.ae',
+#     'http://alamwaj-front.s3-website.me-central-1.amazonaws.com',
+#     'http://www.alamwaj-front.s3-website.me-central-1.amazonaws.com',
+#     'https://alamwaj-front.s3-website.me-central-1.amazonaws.com',
+# ]
 
-CORS_ALLOW_HEADERS = ['*']
-ALLOWED_HOSTS=['*']
-CORS_ALLOW_PRIVATE_NETWORK: True
-CORS_ALLOW_CREDENTIALS: True
-
+# CORS_ALLOW_HEADERS = ['*']
+# ALLOWED_HOSTS=['*']
+# CORS_ALLOW_ALL_ORIGINS: True
+CORS_ALLOWED_ORIGIN_REGEXES = [ r"^https?://.*$",]
+# CORS_ALLOW_PRIVATE_NETWORK: True
+# CORS_ALLOW_CREDENTIALS: True
+# CSRF_TRUSTED_ORIGINS = ['*']
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
