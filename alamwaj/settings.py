@@ -33,7 +33,11 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','3.29.70.146' ,'127.0.0.1','.alamwaj-front.s3-website.me-central-1.amazonaws.com', '.alamwaj.ae']
+ALLOWED_HOSTS = ['localhost',
+                 '3.29.70.146' ,
+                 '127.0.0.1',
+                 '.alamwaj-front.s3-website.me-central-1.amazonaws.com', 
+                 '.alamwaj.ae']
 
 
 # Application definition
@@ -112,12 +116,19 @@ DATABASES = {
 #     'https://alamwaj-front.s3-website.me-central-1.amazonaws.com',
 # ]
 
-# CORS_ALLOW_HEADERS = ['*']
 # ALLOWED_HOSTS=['*']
 # CORS_ALLOW_ALL_ORIGINS: True
-CORS_ALLOWED_ORIGIN_REGEXES = [ r"^https?://.*$",]
-# CORS_ALLOW_PRIVATE_NETWORK: True
-# CORS_ALLOW_CREDENTIALS: True
+CORS_ALLOWED_ORIGIN_REGEXES = [ r"^https?://.*$",r"^http?://.*$",]
+CORS_ALLOW_HEADERS = (
+    "accept",
+    "authorization",
+    "content-type",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+)
+CORS_ALLOW_PRIVATE_NETWORK: True
+CORS_ALLOW_CREDENTIALS: True
 # CSRF_TRUSTED_ORIGINS = ['*']
 
 REST_FRAMEWORK = {
