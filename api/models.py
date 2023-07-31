@@ -17,7 +17,7 @@ class Usr(models.Model):
         return self.user.pk
 
 class Launch(models.Model):
-    number = models.CharField(max_length=30)
+    number = models.CharField(max_length=6, unique=True)
     owner = models.CharField(max_length=30, null=True,blank=True)
     ownerNumber = models.CharField(max_length=15, null=True,blank=True)
     def __str__(self):

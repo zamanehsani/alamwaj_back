@@ -39,7 +39,6 @@ ALLOWED_HOSTS = ['localhost',
                  '.alamwaj-front.s3-website.me-central-1.amazonaws.com', 
                  '.alamwaj.ae']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -95,7 +94,6 @@ WSGI_APPLICATION = 'alamwaj.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
         'NAME': os.getenv('DB_NAME'),
         'PASSWORD': os.getenv('DB_PASSWORD'),
         'USERNAME': os.getenv('DB_USERNAME'),
