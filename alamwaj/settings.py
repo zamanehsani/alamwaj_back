@@ -88,6 +88,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'alamwaj.wsgi.application'
 
 
+
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -95,10 +96,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME':  os.getenv('DB_NAME'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'USERNAME': os.getenv('DB_USERNAME'),
-        'HOST': os.getenv('DB_ENDPOINT'),
-        'PORT': os.getenv('DB_PORT'),
+        # 'PASSWORD': os.getenv('DB_PASSWORD'),
+        # 'USERNAME': os.getenv('DB_USERNAME'),
+        # 'HOST': os.getenv('DB_ENDPOINT'),
+        # 'PORT': os.getenv('DB_PORT'),
     }
 }
 
