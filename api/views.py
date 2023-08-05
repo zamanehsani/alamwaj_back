@@ -10,7 +10,11 @@ from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime
 from django.db.models import Q
 from django.utils import timezone
+from api.exit_lauch_report import generate_pdf
 
+from django.core.mail import EmailMessage
+from django.shortcuts import get_object_or_404
+from django.core.files.base import ContentFile
 
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -75,6 +79,35 @@ class VesselViewSet(viewsets.ModelViewSet):
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
+@csrf_exempt
+def Exitvessel(request):
+    if request.method == 'POST':
+        vessel = request.POST.get("vessel")
+        try:
+            obj = models.Vessel.objects.filter(pk = vessel).filter(~Q(status = 'exit')).first()
+            obj.status = 'exit'
+           
+             # Generate the PDF content
+            pdf_filename = f'vessel_report_{obj.pk}.pdf'
+            pdf_content = generate_pdf(obj)
+
+            obj.exitReport.save(pdf_filename, ContentFile(pdf_content))
+
+            # Send an email with the attached PDF  
+            subject = 'Vessel Exit Report'
+            message = f"Vessel {obj} has been exited. \nPlease see attached file the report."
+            from_email = 'aldeyarbakery@gmail.com'
+            recipient_list = ['zamanehsani@gmail.com']
+            email = EmailMessage(subject, message, from_email, recipient_list)
+            email.attach(pdf_filename, pdf_content, "application/pdf")
+            email.send()
+
+            serializer = serializers.VesselSerializer(obj,context={'request': request})
+            return JsonResponse(serializer.data)
+        except:
+            return JsonResponse({'err':'something went wrong.'}, status=400)
+        
+    return JsonResponse({'error': 'something went wrong. launch did not exit...'})
     
 class ParkingViewSet(viewsets.ModelViewSet):
     queryset = models.VesselParking.objects.all()

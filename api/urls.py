@@ -71,4 +71,6 @@ urlpatterns = [
     path('user-expense-month/', views.UserExpenseMonth.as_view({'get':'list'}), name='vessel_expense_month'),
     path('user-receive-month/', views.UserReceiveMonth.as_view({'get':'list'}), name='user_receive_month'),
     path('launch-vessel-list/', views.LaunchVesselList.as_view({'get':'list'}), name='launch_vessel_list'),
+    path('vessel-exit/', views.Exitvessel, name='exit_vessel'),
+
 ]
