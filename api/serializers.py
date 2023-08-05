@@ -8,9 +8,10 @@ class UsrSerializer(serializers.ModelSerializer):
         model = models.Usr
         fields = ('type',)
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+    usr = UsrSerializer()
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'email','url', 'is_staff', 'is_active',]
+        fields = ['first_name', 'last_name', 'username', 'email','url', 'is_staff', 'is_active','usr']
 
 class UserDetailsSerializer(serializers.ModelSerializer):
     usr = UsrSerializer()
