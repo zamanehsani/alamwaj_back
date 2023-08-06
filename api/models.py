@@ -70,10 +70,10 @@ class Vessel(models.Model):
 
     # get the balance
     def getTotalBalance(self, *args, **kwargs):
+
         a = self.get_extra_parking()
         a+= self.total_expenses()
         a+= self.agenty
-        
         return a
     
     def getLaunchNumber(self, *args, **kwargs):
