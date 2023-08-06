@@ -67,7 +67,7 @@ class LaunchViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.LaunchSerializer
 
 class VesselViewSet(viewsets.ModelViewSet):
-    queryset = models.Vessel.objects.all()
+    queryset = models.Vessel.objects.filter(~Q(status = 'exit'))
     serializer_class = serializers.VesselSerializer
     parser_classes = [MultiPartParser]
 
