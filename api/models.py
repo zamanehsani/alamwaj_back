@@ -363,7 +363,7 @@ class UserExpenseAccount(models.Model):
     note    = models.TextField(null=True,blank=True)
 
     def __str__(self):
-        return int(self.amount)
+        return str(self.amount)
 
     def getDoneByName(self, *args, **kwargs):
         return self.done_by.username
@@ -376,7 +376,7 @@ class UserReceiveAccount(models.Model):
     note    = models.TextField(null=True,blank=True)
 
     def __str__(self):
-        return int(self.amount)
+        return str(self.amount)
 
     def getDoneByName(self, *args, **kwargs):
         return self.done_by.username
