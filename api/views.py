@@ -577,3 +577,10 @@ class LaunchVesselList(viewsets.ModelViewSet):
             queryset = queryset.filter(launch__pk=self.request.query_params.get('launch'))
             return queryset
         return []
+
+class VesselDiscountViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselDiscountSerializer
+    queryset = models.VesselDiscount.objects.all()
+
+
+    

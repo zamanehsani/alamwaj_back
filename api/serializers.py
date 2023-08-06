@@ -229,7 +229,7 @@ class VesselDiscountSerializer(serializers.HyperlinkedModelSerializer):
     file = serializers.FileField(required=False)
     class Meta:
         model = models.VesselDiscount
-        fields = ['pk','url','note','file','date', 'amount','done_by', 'getDoneByName', ]
+        fields = ['pk','url','note','file','date', 'amount','done_by', 'getDoneByName', 'vessel',]
 
     def create(self, validated_data):
         file = validated_data.pop('file', None)
