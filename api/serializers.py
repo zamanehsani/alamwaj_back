@@ -225,3 +225,18 @@ class UserReceiveSerializer(serializers.HyperlinkedModelSerializer):
             hamal.save()
         return hamal
     
+class VesselDiscountSerializer(serializers.HyperlinkedModelSerializer):
+    file = serializers.FileField(required=False)
+    class Meta:
+        model = models.VesselDiscount
+        fields = ['pk','url','note','file','date', 'amount','done_by', 'getDoneByName', ]
+
+    def create(self, validated_data):
+        file = validated_data.pop('file', None)
+        disc = super().create(validated_data)
+        
+        if file:
+            disc.file = file
+            disc.save()
+        return disc
+    

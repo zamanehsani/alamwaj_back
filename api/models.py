@@ -385,6 +385,7 @@ class UserReceiveAccount(models.Model):
         return self.done_by.username
 
 class VesselDiscount(models.Model):
+    vessel  = models.ForeignKey(Vessel,on_delete=models.CASCADE)
     amount  = models.DecimalField(max_digits=8, decimal_places=2)
     date    = models.DateTimeField(auto_created=True, auto_now_add=True)
     done_by = models.ForeignKey(User, on_delete=models.CASCADE)
