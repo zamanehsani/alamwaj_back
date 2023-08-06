@@ -384,4 +384,15 @@ class UserReceiveAccount(models.Model):
     def getDoneByName(self, *args, **kwargs):
         return self.done_by.username
 
-    
+class VesselDiscount(models.Model):
+    amount  = models.DecimalField(max_digits=8, decimal_places=2)
+    date    = models.DateTimeField(auto_created=True, auto_now_add=True)
+    done_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    file    = models.FileField(upload_to=generate_file_path, null=True, blank=True)
+    note    = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return str(self.amount)
+
+    def getDoneByName(self, *args, **kwargs):
+        return self.done_by.username
