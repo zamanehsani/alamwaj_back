@@ -205,7 +205,7 @@ def generate_file_path(instance, filename):
 
 class VesselParking(models.Model):
     vessel = models.ForeignKey(Vessel,on_delete=models.CASCADE)
-    days = models.PositiveSmallIntegerField(blank=True)
+    days = models.PositiveSmallIntegerField()
     amount = models.DecimalField(max_digits=8, decimal_places=2)
     date = models.DateTimeField(auto_created=True, auto_now_add=True)
     done_by = models.ForeignKey(User, on_delete=models.CASCADE)
