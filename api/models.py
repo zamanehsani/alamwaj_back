@@ -17,9 +17,12 @@ class Usr(models.Model):
         return self.user.pk
 
 class Launch(models.Model):
-    number = models.CharField(max_length=6, unique=True)
-    owner = models.CharField(max_length=30, null=True,blank=True)
+    number      = models.CharField(max_length=6, unique=True)
+    owner       = models.CharField(max_length=30, null=True,blank=True)
     ownerNumber = models.CharField(max_length=15, null=True,blank=True)
+    note        = models.TextField(blank=True, null=True)
+    warning     = models.BooleanField(default=False)
+
     def __str__(self):
         return self.number
     
@@ -44,7 +47,7 @@ def mathrahani_file(instance, filename):
     
 
 class Vessel(models.Model):
-    launch = models.ForeignKey(Launch,on_delete=models.CASCADE)
+    launch = models.ForeignKey(Launch,on_delete=models.CASCADE,)
     captain = models.CharField(max_length=30)
     captainNumber = models.CharField(max_length=15)
     owner = models.CharField(max_length=30,null=True,blank=True)

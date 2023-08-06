@@ -74,10 +74,25 @@ class VesselViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+        # Check if the launch has no warning and is clear to register.
+        if not self.is_data_valid(serializer.validated_data):
+            # Return an error response
+            return Response({"LaunchError": "This launch has warning!!!"}, status=status.HTTP_400_BAD_REQUEST )
         self.perform_create(serializer)
-
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+    
+    def is_data_valid(self, data):
+        try:
+            obj = models.Launch.objects.get(number=data.get('launch', None))
+        except models.Launch.DoesNotExist:
+            # Handle the case when the Launch object with the specified number does not exist.
+            return False
+        
+        if obj.warning:
+            return False
+        
+        return True
 
 @csrf_exempt
 def Exitvessel(request):
@@ -135,7 +150,6 @@ class VesselParkingViewSet(viewsets.ModelViewSet):
             return queryset
         return []
     
-
 class ExitViewSet(viewsets.ModelViewSet):
     queryset = models.VesselExit.objects.all()
     serializer_class = serializers.VesselExitSerializer
@@ -161,7 +175,6 @@ class VesselExitViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(vessel=vessel_id)
             return queryset
         return []
-    
     
 class TrueCopyViewSet(viewsets.ModelViewSet):
     queryset = models.VesselTrueCopy.objects.all()
@@ -280,7 +293,6 @@ class HamaliListViewSet(viewsets.ModelViewSet):
         # if nothing is giving in the url params; return all the usr lists
         return queryset
    
-
 # general hamal list
 class HamaliViewSet(viewsets.ModelViewSet):
     queryset = models.VesselHamali.objects.all()
@@ -325,7 +337,6 @@ class UserHamaliViewSet(viewsets.ModelViewSet):
             return queryset
         return []
     
-
 class AccountViewSet(viewsets.ModelViewSet):
     queryset = models.VesselAccount.objects.all()
     serializer_class = serializers.VesselAccountSerializer
@@ -513,8 +524,7 @@ class UserExpenseViewSet(viewsets.ModelViewSet):
 
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-    
-    
+     
 class UserReceiveViewSet(viewsets.ModelViewSet):
     queryset = models.UserReceiveAccount.objects.all()
     serializer_class = serializers.UserReceiveSerializer
@@ -528,7 +538,6 @@ class UserReceiveViewSet(viewsets.ModelViewSet):
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
     
-
 class UserExpenseMonth(viewsets.ModelViewSet):
     serializer_class = serializers.UserExpenseSerializer
     queryset = models.UserExpenseAccount.objects.all()

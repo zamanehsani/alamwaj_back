@@ -25,10 +25,13 @@ class USRSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['pk', 'type', 'url', 'getUsername', 'user', 'getEmail', 'getUserPK']
 
 class LaunchSerializer(serializers.HyperlinkedModelSerializer):
+    vessel_count = serializers.SerializerMethodField()
     class Meta:
         model = models.Launch
-        fields = ['pk', 'url', 'number', 'owner', 'ownerNumber']
-
+        fields = ['pk', 'url', 'number', 'owner', 'ownerNumber', 'note', 'warning','vessel_count']
+    
+    def get_vessel_count(self, launch):
+        return models.Vessel.objects.filter(launch=launch).count()
 
 class VesselSerializer(serializers.HyperlinkedModelSerializer):
     file = serializers.FileField(required=False)
