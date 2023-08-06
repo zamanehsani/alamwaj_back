@@ -307,8 +307,8 @@ class HamaliViewSet(viewsets.ModelViewSet):
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
-    
-    # gets the hamali based on vessels
+
+# gets the hamali based on vessels
 class VesselHamaliViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.VesselHamaliSerializer
     queryset = models.VesselHamali.objects.all()
@@ -583,4 +583,15 @@ class VesselDiscountViewSet(viewsets.ModelViewSet):
     queryset = models.VesselDiscount.objects.all()
 
 
-    
+class VesselDiscViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselDiscountSerializer
+    queryset = models.VesselDiscount.objects.all()
+
+    def get_queryset(self):
+        queryset = self.queryset
+        vessel_id = self.request.query_params.get('vessel_id')  # Get the vessel ID from query parameters
+        if vessel_id:
+            # Filter the queryset based on the vessel ID
+            queryset = queryset.filter(vessel=vessel_id)
+            return queryset
+        return []

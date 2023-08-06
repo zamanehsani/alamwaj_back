@@ -110,10 +110,10 @@ class Vessel(models.Model):
         total = expenses.aggregate(Sum('amount'))['amount__sum']
         return total if total else 0
     
-    # def total_discount(self):
-    #     discounts = VesselDiscount.objects.filter(vessel=self)
-    #     total = discounts.aggregate(Sum('amount'))['amount__sum']
-    #     return total if total else 0
+    def total_discount(self):
+        discounts = VesselDiscount.objects.filter(vessel=self)
+        total = discounts.aggregate(Sum('amount'))['amount__sum']
+        return total if total else 0
     
     def get_extra_parking(self):
         park = self.vesselparking_set.all()
@@ -128,20 +128,20 @@ class Vessel(models.Model):
         return total_receivees if total_receivees else 0
     
     def get_balance(self):
-        # discount = self.total_discount()
+        discount = self.total_discount()
         expense = self.total_expenses()
         received = self.total_receivees()
         extra_park = self.get_extra_parking()
+
         exp, obtain = 0, 0
-        if expense:
-            exp += expense
-        # if discount:
-        #     obtain += discount
+        if discount:
+            obtain += discount
         if received:
             obtain += received
+        if expense:
+            exp += expense
         if extra_park:
             exp += extra_park
-
         if self.agenty:
             exp += int(self.agenty)
         else:

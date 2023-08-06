@@ -37,7 +37,7 @@ class VesselSerializer(serializers.HyperlinkedModelSerializer):
     file = serializers.FileField(required=False)
     class Meta:
         model = models.Vessel
-        fields = ['pk','url','date','captain','captainNumber', 'get_balance',
+        fields = ['pk','url','date','captain','captainNumber', 'get_balance','total_discount',
                   'total_manifestation', 'total_expenses','get_extra_parking','get_profit',
                   'owner','ownerNumber','sourcePort','DestinationPort', 'total_receivees',
                   'status','agenty','file','launch', 'getTotalBalance','getLaunchNumber','mathrahani','exitReport']

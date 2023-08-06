@@ -35,6 +35,8 @@ router.register(r'vessel/amend', views.VesselAmendViewSet)
 
 router.register(r'hamals', views.HamaliViewSet)
 router.register(r'vessel-discount', views.VesselDiscountViewSet)
+router.register(r'vessel/discount', views.VesselDiscViewSet)
+
 
 # router.register(r'hamali-list', views.HamaliListViewSet)
 # router.register(r'hamali-details', views.UserHamaliViewSet)
