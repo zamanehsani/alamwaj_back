@@ -63,11 +63,11 @@ class USRViewSet(viewsets.ModelViewSet):
 
  
 class LaunchViewSet(viewsets.ModelViewSet):
-    queryset = models.Launch.objects.all()
+    queryset = models.Launch.objects.all().order_by('number')
     serializer_class = serializers.LaunchSerializer
 
 class VesselViewSet(viewsets.ModelViewSet):
-    queryset = models.Vessel.objects.filter(~Q(status = 'exit'))
+    queryset = models.Vessel.objects.filter(~Q(status = 'exit')).order_by('launch__number')
     serializer_class = serializers.VesselSerializer
     parser_classes = [MultiPartParser]
 
