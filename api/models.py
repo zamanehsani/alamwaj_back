@@ -225,6 +225,9 @@ class VesselParking(models.Model):
     
     def getDoneByName(self, *args, **kwargs):
         return self.done_by.username
+    
+    def getVessel(self, *args, **kwargs):
+        return self.vessel.launch.number
 
 class VesselExpenses(models.Model):
     vessel  = models.ForeignKey(Vessel,on_delete=models.CASCADE)
@@ -242,6 +245,8 @@ class VesselExpenses(models.Model):
     
     def getVesselNumber(self, *args, **kwargs):
         return self.vessel.launch.number
+    def getVessel(self, *args, **kwargs):
+        return self.vessel.launch.number
 
 class VesselExit(models.Model):
     vessel = models.ForeignKey(Vessel,on_delete=models.CASCADE)
@@ -256,6 +261,8 @@ class VesselExit(models.Model):
 
     def getDoneByName(self, *args, **kwargs):
         return self.done_by.username
+    def getVessel(self, *args, **kwargs):
+        return self.vessel.launch.number
     
 class VesselManifest(models.Model):
     vessel = models.ForeignKey(Vessel,on_delete=models.CASCADE)
@@ -270,7 +277,8 @@ class VesselManifest(models.Model):
 
     def getDoneByName(self, *args, **kwargs):
         return self.done_by.username
-    
+    def getVessel(self, *args, **kwargs):
+        return self.vessel.launch.number
 class VesselAttestation(models.Model):
     vessel = models.ForeignKey(Vessel,on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=8, decimal_places=2)
@@ -285,6 +293,9 @@ class VesselAttestation(models.Model):
     def getDoneByName(self, *args, **kwargs):
         return self.done_by.username
     
+    def getVessel(self, *args, **kwargs):
+        return self.vessel.launch.number
+    
 class VesselAmend(models.Model):
     vessel = models.ForeignKey(Vessel,on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=8, decimal_places=2)
@@ -298,6 +309,8 @@ class VesselAmend(models.Model):
 
     def getDoneByName(self, *args, **kwargs):
         return self.done_by.username
+    def getVessel(self, *args, **kwargs):
+        return self.vessel.launch.number
     
 class VesselTrueCopy(models.Model):
     vessel = models.ForeignKey(Vessel,on_delete=models.CASCADE)
@@ -312,6 +325,9 @@ class VesselTrueCopy(models.Model):
 
     def getDoneByName(self, *args, **kwargs):
         return self.done_by.username
+    def getVessel(self, *args, **kwargs):
+        return self.vessel.launch.number
+    
 
 class VesselHamali(models.Model):
     vessel = models.ForeignKey(Vessel,on_delete=models.CASCADE)
@@ -397,3 +413,6 @@ class VesselDiscount(models.Model):
 
     def getDoneByName(self, *args, **kwargs):
         return self.done_by.username
+    
+    def getVessel(self, *args, **kwargs):
+        return self.vessel.launch.number

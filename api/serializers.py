@@ -56,7 +56,7 @@ class VesselParkingSerializer(serializers.HyperlinkedModelSerializer):
     file = serializers.FileField(required=False)
     class Meta:
         model = models.VesselParking
-        fields = ['pk','url','days','amount',
+        fields = ['pk','url','days','amount','getVessel',
                   'vessel','done_by','note','file', 'getExtraParking','date', 'getDoneByName']
 
     def create(self, validated_data):
@@ -74,7 +74,7 @@ class VesselExitSerializer(serializers.HyperlinkedModelSerializer):
     file = serializers.FileField(required=False)
     class Meta:
         model = models.VesselExit
-        fields = ['pk','url','amount',
+        fields = ['pk','url','amount', 'getVessel',
                   'vessel','done_by','note','file','date', 'getDoneByName']
     def create(self, validated_data):
         file = validated_data.pop('file', None)
@@ -91,7 +91,7 @@ class VesselTrueCopySerializer(serializers.HyperlinkedModelSerializer):
     file = serializers.FileField(required=False)
     class Meta:
         model = models.VesselTrueCopy
-        fields = ['pk','url','amount',
+        fields = ['pk','url','amount', 'getVessel',
                   'vessel','done_by','note','file','date', 'getDoneByName']
     def create(self, validated_data):
         file = validated_data.pop('file', None)
@@ -107,7 +107,7 @@ class VesselAttestationSerializer(serializers.HyperlinkedModelSerializer):
     file = serializers.FileField(required=False)
     class Meta:
         model = models.VesselAttestation
-        fields = ['pk','url','amount',
+        fields = ['pk','url','amount', 'getVessel',
                   'vessel','done_by','note','file','date', 'getDoneByName']
     def create(self, validated_data):
         file = validated_data.pop('file', None)
@@ -122,7 +122,7 @@ class VesselAmendSerializer(serializers.HyperlinkedModelSerializer):
     file = serializers.FileField(required=False)
     class Meta:
         model = models.VesselAmend
-        fields = ['pk','url','amount',
+        fields = ['pk','url','amount', 'getVessel',
                   'vessel','done_by','note','file','date', 'getDoneByName']
     def create(self, validated_data):
         file = validated_data.pop('file', None)
@@ -137,7 +137,7 @@ class VesselManifestSerializer(serializers.HyperlinkedModelSerializer):
     file = serializers.FileField(required=False)
     class Meta:
         model = models.VesselManifest
-        fields = ['pk','url','amount',
+        fields = ['pk','url','amount', 'getVessel',
                   'vessel','done_by','note','file','date', 'getDoneByName']
     def create(self, validated_data):
         file = validated_data.pop('file', None)
@@ -229,7 +229,7 @@ class VesselDiscountSerializer(serializers.HyperlinkedModelSerializer):
     file = serializers.FileField(required=False)
     class Meta:
         model = models.VesselDiscount
-        fields = ['pk','url','note','file','date', 'amount','done_by', 'getDoneByName', 'vessel',]
+        fields = ['pk','url','note','file','date', 'amount','done_by', 'getVessel','getDoneByName', 'vessel',]
 
     def create(self, validated_data):
         file = validated_data.pop('file', None)
