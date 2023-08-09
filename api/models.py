@@ -27,6 +27,12 @@ class Launch(models.Model):
         return self.number
     
 
+def user_file_path(instance, filename):
+    timestamp = timezone.now().strftime('%d%m%Y')
+    user = instance.done_by
+    filename = f"{timestamp}-{user}"
+    return f"{user}/{filename}"
+
 def generate_file_path(instance, filename):
     timestamp = timezone.now().strftime('%d%m%Y')
     launch_number = instance.launch.number
@@ -378,7 +384,7 @@ class UserExpenseAccount(models.Model):
     amount  = models.DecimalField(max_digits=8, decimal_places=2)
     date    = models.DateTimeField(auto_created=True, auto_now_add=True)
     done_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    file    = models.FileField(upload_to=generate_file_path, null=True,blank=True)
+    file    = models.FileField(upload_to=user_file_path, null=True,blank=True)
     note    = models.TextField(null=True,blank=True)
 
     def __str__(self):
@@ -391,7 +397,7 @@ class UserReceiveAccount(models.Model):
     amount  = models.DecimalField(max_digits=8, decimal_places=2)
     date    = models.DateTimeField(auto_created=True, auto_now_add=True)
     done_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    file    = models.FileField(upload_to=generate_file_path, null=True,blank=True)
+    file    = models.FileField(upload_to=user_file_path, null=True,blank=True)
     note    = models.TextField(null=True,blank=True)
 
     def __str__(self):
