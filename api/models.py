@@ -41,7 +41,7 @@ def generate_file_path(instance, filename):
 
 def booking_file_path(instance, filename):
     timestamp = timezone.now().strftime('%d%m%Y')
-    launch_number = instance.launch.number
+    launch_number = instance.vessel.launch.number
     filename = f"{timestamp}-{launch_number}"
     return f"vessels/booking/{filename}/{filename}"
 
@@ -432,7 +432,8 @@ class VesselDiscount(models.Model):
 
 class VesselBooking(models.Model):
     vessel  = models.ForeignKey(Vessel,on_delete=models.CASCADE)
-    amount  = models.DecimalField(max_digits=8, decimal_places=2)
+    amount  = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
+    company = models.CharField(max_length=80, blank=True, null=True)
     date    = models.DateTimeField(auto_created=True, auto_now_add=True)
     done_by = models.ForeignKey(User, on_delete=models.CASCADE)
     file    = models.FileField(upload_to=booking_file_path, null=True, blank=True)
