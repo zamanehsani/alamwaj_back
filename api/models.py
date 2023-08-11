@@ -39,6 +39,12 @@ def generate_file_path(instance, filename):
     filename = f"{timestamp}-{launch_number}"
     return f"vessels/{filename}/{filename}"
 
+def booking_file_path(instance, filename):
+    timestamp = timezone.now().strftime('%d%m%Y')
+    launch_number = instance.launch.number
+    filename = f"{timestamp}-{launch_number}"
+    return f"vessels/booking/{filename}/{filename}"
+
 def exitReport_file_path(instance, filename):
     timestamp = timezone.now().strftime('%d%m%Y')
     launch_number = instance.launch.number
@@ -413,6 +419,25 @@ class VesselDiscount(models.Model):
     done_by = models.ForeignKey(User, on_delete=models.CASCADE)
     file    = models.FileField(upload_to=generate_file_path, null=True, blank=True)
     note    = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return str(self.amount)
+
+    def getDoneByName(self, *args, **kwargs):
+        return self.done_by.username
+    
+    def getVessel(self, *args, **kwargs):
+        return self.vessel.launch.number
+    
+
+class VesselBooking(models.Model):
+    vessel  = models.ForeignKey(Vessel,on_delete=models.CASCADE)
+    amount  = models.DecimalField(max_digits=8, decimal_places=2)
+    date    = models.DateTimeField(auto_created=True, auto_now_add=True)
+    done_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    file    = models.FileField(upload_to=booking_file_path, null=True, blank=True)
+    note    = models.TextField(null=True, blank=True)
+    type    = models.CharField(max_length=20, null=True, blank=True)
 
     def __str__(self):
         return str(self.amount)

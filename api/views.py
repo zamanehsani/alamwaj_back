@@ -595,3 +595,21 @@ class VesselDiscViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(vessel=vessel_id)
             return queryset
         return []
+    
+class BookingViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselBookingSerializer
+    queryset = models.VesselBooking.objects.all()
+
+
+class VesselBookingViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselBookingSerializer
+    queryset = models.VesselBooking.objects.all()
+
+    def get_queryset(self):
+        queryset = self.queryset
+        vessel_id = self.request.query_params.get('vessel_id')  # Get the vessel ID from query parameters
+        if vessel_id:
+            # Filter the queryset based on the vessel ID
+            queryset = queryset.filter(vessel=vessel_id)
+            return queryset
+        return []
