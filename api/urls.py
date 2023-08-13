@@ -51,6 +51,9 @@ router.register(r'vessel/expense', views.VesselExpensesViewSet)
 router.register(r'launch-search', views.LaunchSearchViewSet)
 router.register(r'user-expense', views.UserExpenseViewSet)
 router.register(r'user-receive', views.UserReceiveViewSet)
+
+router.register(r'company', views.CompanyViewSet)
+router.register(r'hs-code', views.HSCodeViewSet)
 # router.register(r'parking-month-view', views.ParkingMonthView)
 
 

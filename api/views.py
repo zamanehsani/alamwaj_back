@@ -613,3 +613,20 @@ class VesselBookingViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(vessel=vessel_id)
             return queryset
         return []
+    
+class HSCodeViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.HSCodeSerializer
+    queryset = models.HS_codes.objects.all()
+
+    def get_queryset(self):
+        queryset = self.queryset
+        name = self.request.query_params.get('name')  # Get the vessel ID from query parameters
+        if name:
+            # Filter the queryset based on the vessel ID
+            queryset = queryset.filter(description=name)
+            return queryset
+        return []
+    
+class CompanyViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.CompanySerializer
+    queryset = models.Company.objects.all()

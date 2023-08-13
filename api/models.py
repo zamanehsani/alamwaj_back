@@ -209,11 +209,6 @@ class Vessel(models.Model):
         return profit if profit else 0
     
 
-def generate_file_path(instance, filename):
-    timestamp = timezone.now().strftime('%d%m%Y')
-    launch_number = instance.vessel
-    filename = f"{timestamp}-{launch_number}"
-    return f"vessels/{filename}/parking"
 
 class VesselParking(models.Model):
     vessel = models.ForeignKey(Vessel,on_delete=models.CASCADE)
@@ -291,6 +286,7 @@ class VesselManifest(models.Model):
         return self.done_by.username
     def getVessel(self, *args, **kwargs):
         return self.vessel.launch.number
+
 class VesselAttestation(models.Model):
     vessel = models.ForeignKey(Vessel,on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=8, decimal_places=2)
@@ -448,3 +444,27 @@ class VesselBooking(models.Model):
     
     def getVessel(self, *args, **kwargs):
         return self.vessel.launch.number
+
+
+# hs codes
+class HS_codes(models.Model):
+    code = models.CharField(max_length=10, null=True, blank=True)
+    description = models.CharField(max_length=150, null=True, blank=True)
+    category = models.CharField(max_length=50, null=True, blank=True)
+
+    def __str__(self):
+        return self.code
+
+# company
+class Company(models.Model):
+    name = models.CharField(max_length=80, null=True, blank=True)
+    address = models.CharField(max_length=150, null=True, blank=True)
+    logo = models.FileField(upload_to='company', null=True, blank=True)
+    trn = models.CharField(max_length=50, null=True, blank=True)
+    tel = models.CharField(max_length=15, null=True, blank=True)
+    mob = models.CharField(max_length=15, null=True, blank=True)
+    email = models.CharField(max_length=50, null=True, blank=True)
+    pob = models.CharField(max_length=50, null=True, blank=True)
+
+    def __str__(self):
+        return self.name

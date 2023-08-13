@@ -255,3 +255,25 @@ class VesselBookingSerializer(serializers.HyperlinkedModelSerializer):
             disc.save()
         return disc
     
+
+class HSCodeSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = models.HS_codes
+        fields = ['pk','url','code','description','category']
+
+    
+class CompanySerializer(serializers.HyperlinkedModelSerializer):
+    logo = serializers.FileField(required=False)
+    class Meta:
+        model = models.Company
+        fields = ['pk','url','name','address','logo','trn', 'tel','mob', 
+                  'pob','email']
+
+    def create(self, validated_data):
+        logo = validated_data.pop('logo', None)
+        instance = super().create(validated_data)
+        if logo:
+            instance.logo = logo
+            instance.save()
+        return instance
+    
