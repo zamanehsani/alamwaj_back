@@ -623,10 +623,11 @@ class HSCodeViewSet(viewsets.ModelViewSet):
         name = self.request.query_params.get('name')  # Get the vessel ID from query parameters
         if name:
             # Filter the queryset based on the vessel ID
-            queryset = queryset.filter(description=name)
+            queryset = queryset.filter(Q(description__icontains=name))
             return queryset
         return []
     
 class CompanyViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.CompanySerializer
     queryset = models.Company.objects.all()
+
