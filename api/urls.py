@@ -40,6 +40,7 @@ router.register(r'vessel/discount', views.VesselDiscViewSet)
 
 # transites and booking of tax, local, transite
 router.register(r'booking', views.BookingViewSet)
+router.register(r'transites', views.TransitesViewSet)
 router.register(r'vessel/booking', views.VesselBookingViewSet)
 
 router.register(r'accounts', views.AccountViewSet)

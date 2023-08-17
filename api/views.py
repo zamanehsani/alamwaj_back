@@ -7,18 +7,14 @@ from rest_framework.response import Response
 from django.http import JsonResponse
 from rest_framework import status
 from django.views.decorators.csrf import csrf_exempt
-from datetime import datetime
 from django.db.models import Q
-from django.utils import timezone
 from api.exit_lauch_report import generate_pdf
-
 from django.core.mail import EmailMessage
-from django.shortcuts import get_object_or_404
 from django.core.files.base import ContentFile
-
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from django.views.generic import ListView
 
 
 class LaunchSearchViewSet(viewsets.ModelViewSet):
@@ -599,6 +595,19 @@ class VesselDiscViewSet(viewsets.ModelViewSet):
 class BookingViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.VesselBookingSerializer
     queryset = models.VesselBooking.objects.all()
+
+
+
+from rest_framework.pagination import PageNumberPagination
+class TransitePagination(PageNumberPagination):
+    page_size = 3
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
+class TransitesViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselBookingSerializer
+    queryset = models.VesselBooking.objects.filter(paid=False).filter(final_stamp = True)
+    pagination_class = TransitePagination
 
 
 class VesselBookingViewSet(viewsets.ModelViewSet):

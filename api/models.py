@@ -435,15 +435,28 @@ class VesselBooking(models.Model):
     file    = models.FileField(upload_to=booking_file_path, null=True, blank=True)
     note    = models.TextField(null=True, blank=True)
     type    = models.CharField(max_length=20, null=True, blank=True)
+    
+    # price   = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
+    paid    = models.BooleanField(default=False)
+    amount_paid = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
+    pay_date    = models.DateTimeField(null=True, blank=True)
+    final_stamp = models.BooleanField(default=False)
+    received_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_by', blank=True, null=True)
+    
 
     def __str__(self):
         return str(self.amount)
 
     def getDoneByName(self, *args, **kwargs):
-        return self.done_by.username
+        return self.done_by.username 
+    
+    def getReceivedByName(self, *args, **kwargs):
+        if self.received_by:
+            return self.received_by.username
+        return ''
     
     def getVessel(self, *args, **kwargs):
-        return self.vessel.launch.number
+        return self.vessel.launch.number 
 
 
 # hs codes

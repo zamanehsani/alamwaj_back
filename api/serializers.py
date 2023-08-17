@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import  serializers
 from api import models
+from datetime import datetime
 # Serializers define the API representation.
 
 class UsrSerializer(serializers.ModelSerializer):
@@ -244,17 +245,28 @@ class VesselBookingSerializer(serializers.HyperlinkedModelSerializer):
     file = serializers.FileField(required=False)
     class Meta:
         model = models.VesselBooking
-        fields = ['pk','url','note','file','date','company', 'amount','done_by', 'getVessel','getDoneByName', 'vessel','type']
+        fields = ['pk','url','note','file','date','price', 'paid', 'amount_paid', 
+                  'pay_date', 'final_stamp', 'received_by', 'getReceivedByName',
+                  'company', 'amount','done_by', 'getVessel','getDoneByName', 'vessel','type']
 
     def create(self, validated_data):
         file = validated_data.pop('file', None)
         disc = super().create(validated_data)
-        
         if file:
             disc.file = file
             disc.save()
         return disc
     
+    def update(self, instance, validated_data):
+        amount_paid = validated_data.pop('amount_paid', None)
+        instance = super().update(instance, validated_data)
+        if amount_paid:
+            print("amount paid: ")
+            instance.amount_paid = amount_paid
+            instance.pay_date = datetime.now()  # Set pay_date to current date and time
+            instance.save()
+            print("amount paid saved: ", instance.amount_paid)
+        return instance
 
 class HSCodeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
