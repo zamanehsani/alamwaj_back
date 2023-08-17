@@ -1,0 +1,981 @@
+[
+    { 
+    "model": "api.HS_codes",
+    "pk": 1,
+    "fields": {       
+      "description": "CANNED PINEAPPLES ",
+      "code": "20082090"
+      } 
+    },
+    { 
+    "model": "api.HS_codes",
+    "pk": 2,
+    "fields": {       
+      "description": "FOOD ITEMS",
+      "code": "21069091"
+      } 
+    },
+    { "model": "api.HS_codes",
+    "pk": 3,
+    "fields": {       "description": "GUM",
+          "code": "21069091"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 4,
+    "fields": {       "description": "JUICE",
+          "code": "21069091"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 5,
+    "fields": {       "description": "EDIBLE TABLETS",
+          "code": "21069091"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 6,
+    "fields": {       "description": "FOOD STUFF",
+          "code": "21069010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 7,
+    "fields": {       "description": "SUGAR ",
+          "code": "21069010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 8,
+    "fields": {       "description": "FOOD ITEMS ",
+          "code": "21069010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 9,
+    "fields": {       "description": "CREAMS",
+          "code": "21069010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 10,
+    "fields": {       "description": "COSMETICS",
+          "code": "21069010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 11,
+    "fields": {       "description": "SANITARY SUPLIES",
+          "code": "34029000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 12,
+    "fields": {       "description": "TAPE",
+          "code": "35069900"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 13,
+    "fields": {       "description": "FAN BELT",
+          "code": "40103900"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 14,
+    "fields": {       "description": "BAGS ",
+          "code": "42022100"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 15,
+    "fields": {       "description": "SWIMMING ITEMS",
+          "code": "95069990"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 16,
+    "fields": {       "description": "BAGS AND SUITES",
+          "code": "46029013"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 17,
+    "fields": {       "description": "SEWING ITEMS",
+          "code": "46029013"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 18,
+    "fields": {       "description": "TEXTILE PIECE GOODS",
+          "code": "54075200"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 19,
+    "fields": {       "description": "CHARGER FOR COMPUTER ",
+          "code": "85044012"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 20,
+    "fields": {       "description": "DISH WASHING MACHINES",
+          "code": "84221900"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 21,
+    "fields": {       "description": "TEXTILE PIECE GOODS",
+          "code": "54075400"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 22,
+    "fields": {       "description": "CARTONS POLYESTER FABRICS TEXTILE ",
+          "code": "54076100"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 23,
+    "fields": {       "description": "PRINTER",
+          "code": "84433990"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 24,
+    "fields": {       "description": "COPY MACHINE",
+          "code": "84433990"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 25,
+    "fields": {       "description": "SPORT ITEMS",
+          "code": "61121100"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 26,
+    "fields": {       "description": "GLOVES",
+          "code": "61161000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 27,
+    "fields": {       "description": "GARMENTS, SOCKS, UMBRELLA, ROPE, CAP",
+          "code": "61161000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 28,
+    "fields": {       "description": "SOCKS",
+          "code": "61161000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 29,
+    "fields": {       "description": "UMBRELLA",
+          "code": "61161000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 30,
+    "fields": {       "description": "ROPE",
+          "code": "61161000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 31,
+    "fields": {       "description": "CAP",
+          "code": "61161000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 32,
+    "fields": {       "description": "BLANKET",
+          "code": "63019000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 33,
+    "fields": {       "description": "SHOES",
+          "code": "64051000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 34,
+    "fields": {       "description": "ARTIFICIAL GRASS",
+          "code": "67021000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 35,
+    "fields": {       "description": "ARTIFICIAL FLOWER",
+          "code": "67021000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 36,
+    "fields": {       "description": "KITCHENWARE ",
+          "code": "70133300"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 37,
+    "fields": {       "description": "KITCHEN UTENSIL",
+          "code": "70133300"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 38,
+    "fields": {       "description": "KNIFE",
+          "code": "70133300"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 39,
+    "fields": {       "description": "FORK",
+          "code": "70133300"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 40,
+    "fields": {       "description": "SPOON",
+          "code": "70133300"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 41,
+    "fields": {       "description": "DECORATIVE ITEMS",
+          "code": "70133300"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 42,
+    "fields": {       "description": "FLASK",
+          "code": "70133300"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 43,
+    "fields": {       "description": "HOME APPLIANCES",
+          "code": "70133300"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 44,
+    "fields": {       "description": "TOOLS",
+          "code": "82054000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 45,
+    "fields": {       "description": "LOCK ",
+          "code": "82054000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 46,
+    "fields": {       "description": "AIR CONDITIONER PARTS",
+          "code": "84158190"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 47,
+    "fields": {       "description": "BATTERY",
+          "code": "85068090"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 48,
+    "fields": {       "description": " GILLETE",
+          "code": "85101000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 49,
+    "fields": {       "description": "SHAVER",
+          "code": "85101000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 50,
+    "fields": {       "description": "CAR WASH ITEMS",
+          "code": "85162990"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 51,
+    "fields": {       "description": "FAN ",
+          "code": "85162990"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 52,
+    "fields": {       "description": "HEATER",
+          "code": "85162990"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 53,
+    "fields": {       "description": "ELECTRONIC ITEMS",
+          "code": "85167100"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 54,
+    "fields": {       "description": "COFFFEE MAKER",
+          "code": "85167100"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 55,
+    "fields": {       "description": "TEA MAKER",
+          "code": "85167100"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 56,
+    "fields": {       "description": "E-HAIR DRYER",
+          "code": "85163100"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 57,
+    "fields": {       "description": "HOME PHONES",
+          "code": "85171100"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 58,
+    "fields": {       "description": "TELEPHONE",
+          "code": "85171100"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 59,
+    "fields": {       "description": "SPEAKER",
+          "code": "85185000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 60,
+    "fields": {       "description": "LIGHTS",
+          "code": "85392200"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 61,
+    "fields": {       "description": "TORCH",
+          "code": "85392200"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 62,
+    "fields": {       "description": "AUTO SPARE PARTS",
+          "code": "87089900"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 63,
+    "fields": {       "description": "SUNGLASS",
+          "code": "90041000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 64,
+    "fields": {       "description": "WATCH",
+          "code": "91021900"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 65,
+    "fields": {       "description": "AUDIO EQUIPMENT ",
+          "code": "92089010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 66,
+    "fields": {       "description": "HOME ITEM",
+          "code": "92089010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 67,
+    "fields": {       "description": "WATER TANKARD",
+          "code": "92089010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 68,
+    "fields": {       "description": "TREE CLIMBING IRONS",
+          "code": "73269020"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 69,
+    "fields": {       "description": "TOYS",
+          "code": "95030090"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 70,
+    "fields": {       "description": "DOLL",
+          "code": "95030090"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 71,
+    "fields": {       "description": "PLAY STATION",
+          "code": "95030090"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 72,
+    "fields": {       "description": "LIGHTER",
+          "code": "96138000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 73,
+    "fields": {       "description": "ARTIFICIAL JEWELRY",
+          "code": "71171900"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 74,
+    "fields": {       "description": "RADIO",
+          "code": "85271300"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 75,
+    "fields": {       "description": "SCALE",
+          "code": "84231000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 76,
+    "fields": {       "description": "BABY CARRIAGES",
+          "code": "87150010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 77,
+    "fields": {       "description": "TOWEL",
+          "code": "63029900"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 78,
+    "fields": {       "description": "PHONE ACCESSORIES",
+          "code": "85044011"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 79,
+    "fields": {       "description": "MECHANO-THERAPY APPLIANCES",
+          "code": "90191000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 80,
+    "fields": {       "description": "MASSAGER",
+          "code": "90191000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 81,
+    "fields": {       "description": "MASSAGE APPARATUS",
+          "code": "90191000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 82,
+    "fields": {       "description": "LENTILS",
+          "code": "7134000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 83,
+    "fields": {       "description": "HEATER GASS",
+          "code": "29037100"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 84,
+    "fields": {       "description": "SEWING ITEMS",
+          "code": "54011090"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 85,
+    "fields": {       "description": "WATER PUMP",
+          "code": "84138120"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 86,
+    "fields": {       "description": "REFRIGERATOR EQUIPMENTS",
+          "code": "84151010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 87,
+    "fields": {       "description": "AIR CONDITIONER",
+          "code": "84151010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 88,
+    "fields": {       "description": "TV",
+          "code": "85287290"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 89,
+    "fields": {       "description": "HAND TOOLS",
+          "code": "82055990"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 90,
+    "fields": {       "description": "GENERATOR",
+          "code": "82055990"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 91,
+    "fields": {       "description": "SEWING MACHINE",
+          "code": "84522900"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 92,
+    "fields": {       "description": "WASHING MACHINE",
+          "code": "84502000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 93,
+    "fields": {       "description": "MAGNET",
+          "code": "87089900"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 94,
+    "fields": {       "description": "AC PARTS",
+          "code": "84159000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 95,
+    "fields": {       "description": "TEA MAKER",
+          "code": "85157100"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 96,
+    "fields": {       "description": "SCOOTER",
+          "code": "95030010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 97,
+    "fields": {       "description": "LIGTHER ",
+          "code": "96132000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 98,
+    "fields": {       "description": "PACKET LIGHTER",
+          "code": "96132000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 99,
+    "fields": {       "description": "HOUSEHOLD ITEMS",
+          "code": "46029016"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 100,
+    "fields": {       "description": "CLOTHES",
+          "code": "46029016"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 101,
+    "fields": {       "description": "MAKSTS",
+          "code": "46029016"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 102,
+    "fields": {       "description": "RICE",
+          "code": "10063000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 103,
+    "fields": {       "description": "COOKING OIL",
+          "code": "15152100"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 104,
+    "fields": {       "description": "OLIVE OIL",
+          "code": "15152100"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 105,
+    "fields": {       "description": "ANIMAL FOOD",
+          "code": "23099090"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 106,
+    "fields": {       "description": "CABLE TIES",
+          "code": "73262030"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 107,
+    "fields": {       "description": "CAR ACCESSORIES ",
+          "code": "63049220"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 108,
+    "fields": {       "description": "SADDLES",
+          "code": "87149500"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 109,
+    "fields": {       "description": "HORSE RIDING ITEM",
+          "code": "87149500"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 110,
+    "fields": {       "description": "TYRE",
+          "code": "40111000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 111,
+    "fields": {       "description": "THERMOMETER",
+          "code": "90251100"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 112,
+    "fields": {       "description": "WEATHER ITEMS",
+          "code": "90251100"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 113,
+    "fields": {       "description": "TOASTER",
+          "code": "85167200"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 114,
+    "fields": {       "description": "TEA",
+          "code": "85167200"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 115,
+    "fields": {       "description": "COFFEE",
+          "code": "85167200"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 116,
+    "fields": {       "description": "PHONE FRAME",
+          "code": "48234000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 117,
+    "fields": {       "description": "CAR BATTERY",
+          "code": "85071000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 118,
+    "fields": {       "description": "SWIMMING POOL ITEMS",
+          "code": "95069990"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 119,
+    "fields": {       "description": "SPORTS ITEMS",
+          "code": "95069990"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 120,
+    "fields": {       "description": "ENERGY DRINKS",
+          "code": "22021024"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 121,
+    "fields": {       "description": " MOTORCYCLES ",
+          "code": "87120090"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 122,
+    "fields": {       "description": "COOKSTOVES",
+          "code": "73211110"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 123,
+    "fields": {       "description": "STOVE",
+          "code": "73211110"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 124,
+    "fields": {       "description": "SCALE",
+          "code": "84232000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 125,
+    "fields": {       "description": "LIPSTICK CHOCOLATE",
+          "code": "17019920"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 126,
+    "fields": {       "description": "LIGHTER CANDY",
+          "code": "17049030"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 127,
+    "fields": {       "description": "SOFT GUMMY CANDY",
+          "code": "17019920"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 128,
+    "fields": {       "description": "LIPSTICK FRUITY CANDY",
+          "code": "17019920"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 129,
+    "fields": {       "description": "CANDY",
+          "code": "17019920"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 130,
+    "fields": {       "description": "GUMBALL",
+          "code": "17041000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 131,
+    "fields": {       "description": "CLEAR GLASS",
+          "code": "70133700"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 132,
+    "fields": {       "description": "LEMON",
+          "code": "08055020"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 133,
+    "fields": {       "description": " DRY LEMON",
+          "code": "08055020"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 134,
+    "fields": {       "description": "SHELLED ALMONDS",
+          "code": "08021200"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 135,
+    "fields": {       "description": "LAMP",
+          "code": "94054990"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 136,
+    "fields": {       "description": "DETEGENT",
+          "code": "37079050"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 137,
+    "fields": {       "description": "LIGUID CLEANING AGENT",
+          "code": "37079050"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 138,
+    "fields": {       "description": "SUNGLASS BAG",
+          "code": "48191010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 139,
+    "fields": {       "description": "STATIONARY ITEMS",
+          "code": "48191010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 140,
+    "fields": {       "description": "ENGINE OIL",
+          "code": "27101919"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 141,
+    "fields": {       "description": "VITAMIN C & ITS DERIVATIVES",
+          "code": "29362700"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 142,
+    "fields": {       "description": "DECORATIVE ITEMS",
+          "code": "69111000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 143,
+    "fields": {       "description": "MONITOR",
+          "code": "84733000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 144,
+    "fields": {       "description": "MARINE ENGINE",
+          "code": "84072100"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 145,
+    "fields": {       "description": "AC GAS",
+          "code": "84189910"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 146,
+    "fields": {       "description": "BICYCLE ",
+          "code": "87120010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 147,
+    "fields": {       "description": "SHAMPOO ",
+          "code": "33051000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 148,
+    "fields": {       "description": "PERFUME",
+          "code": "33030010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 149,
+    "fields": {       "description": "SPRAY",
+          "code": "33030010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 150,
+    "fields": {       "description": "AGARBATHI",
+          "code": "33074130"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 151,
+    "fields": {       "description": "BOKHOR",
+          "code": "33074130"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 152,
+    "fields": {       "description": "PARTICLE BOARD",
+          "code": "44101100"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 153,
+    "fields": {       "description": "WOODEN BOARD",
+          "code": "44101100"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 154,
+    "fields": {       "description": "ENERGY DRINKS",
+          "code": "22021024"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 155,
+    "fields": {       "description": "WALNUTS",
+          "code": "08023100"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 156,
+    "fields": {       "description": "TRICYCLES",
+          "code": "95030010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 157,
+    "fields": {       "description": "SCOOTER ",
+          "code": "95030010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 158,
+    "fields": {       "description": "PEDAL CARS",
+          "code": "95030010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 159,
+    "fields": {       "description": "SHEELED TOYS",
+          "code": "95030010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 160,
+    "fields": {       "description": "CD",
+          "code": "90139010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 161,
+    "fields": {       "description": "DVD",
+          "code": "90139010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 162,
+    "fields": {       "description": "CD PARTS",
+          "code": "90139010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 163,
+    "fields": {       "description": "PROJECTOR",
+          "code": "85286200"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 164,
+    "fields": {       "description": "DRINKING WATER COOLER",
+          "code": "84186910"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 165,
+    "fields": {       "description": "ELECTRONIC CALCULATOR ",
+          "code": "84701000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 166,
+    "fields": {       "description": "AGRICULTURE ITEMS",
+          "code": "12099900"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 167,
+    "fields": {       "description": "COMPUTER",
+          "code": "85286200"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 168,
+    "fields": {       "description": "CHAIR ",
+          "code": "73029000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 169,
+    "fields": {       "description": "TOOTH BRUSHES",
+          "code": "96032100"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 170,
+    "fields": {       "description": "PIANOS",
+          "code": "92019000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 171,
+    "fields": {       "description": "MUSIC ITEMS",
+          "code": "92019000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 172,
+    "fields": {       "description": "LOCKS ",
+          "code": "83014090"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 173,
+    "fields": {       "description": "CHOCOLATE",
+          "code": "18063190"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 174,
+    "fields": {       "description": "ELECTRIC CABLES",
+          "code": "85444291"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 175,
+    "fields": {       "description": "CHIAN",
+          "code": "87087000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 176,
+    "fields": {       "description": "PARTS OF CIGARETTE LIGHTERS ",
+          "code": "96139000"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 177,
+    "fields": {       "description": "WOODEN BEDROOM SETS",
+          "code": "94035010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 178,
+    "fields": {       "description": "LUSTER",
+          "code": "94051100"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 179,
+    "fields": {       "description": "CHANDELIER",
+          "code": "94051100"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 180,
+    "fields": {       "description": "MILK POWDER",
+          "code": "18061011"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 181,
+    "fields": {       "description": "TOOTHPASTE",
+          "code": "33061010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 182,
+    "fields": {       "description": "WATER BOTTLE",
+          "code": "42050050"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 183,
+    "fields": {       "description": "SHISHA ",
+          "code": "96140010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 184,
+    "fields": {       "description": "HOOKAH",
+          "code": "96140010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 185,
+    "fields": {       "description": "VIPING PIPE",
+          "code": "96140010"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 186,
+    "fields": {       "description": "ALMOND IN SHELL",
+          "code": "08021100"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 187,
+    "fields": {       "description": "TV CAMERA",
+          "code": "85258091"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 188,
+    "fields": {       "description": "MEDICAL GLOVES",
+          "code": "40151200"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 189,
+    "fields": {       "description": "MEDICAL ITEMS",
+          "code": "40151200"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 190,
+    "fields": {       "description": "DENTAL ITEMS",
+          "code": "40151200"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 191,
+    "fields": {       "description": "SURGICAL ITEMS",
+          "code": "40151200"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 192,
+    "fields": {       "description": "TUBE & PIPE FITTINGS",
+          "code": "73072900"
+        } },
+    { "model": "api.HS_codes",
+    "pk": 193,
+    "fields": {       "description": "PAINT POWDER",
+          "code": "32129090"
+        } },
+    { 
+    "model": "api.HS_codes",
+    "pk": 194,
+    "fields": {       
+      "description": "PAINT",
+      "code": "32129090"
+      } 
+    }  
+    ]
