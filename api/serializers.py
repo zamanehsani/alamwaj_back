@@ -245,7 +245,7 @@ class VesselBookingSerializer(serializers.HyperlinkedModelSerializer):
     file = serializers.FileField(required=False)
     class Meta:
         model = models.VesselBooking
-        fields = ['pk','url','note','file','date','price', 'paid', 'amount_paid', 
+        fields = ['pk','url','note','file','date', 'paid', 'amount_paid', 
                   'pay_date', 'final_stamp', 'received_by', 'getReceivedByName',
                   'company', 'amount','done_by', 'getVessel','getDoneByName', 'vessel','type']
 
