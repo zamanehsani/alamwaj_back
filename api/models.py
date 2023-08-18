@@ -35,13 +35,19 @@ def user_file_path(instance, filename):
 
 def generate_file_path(instance, filename):
     timestamp = timezone.now().strftime('%d%m%Y')
-    launch_number = instance.launch.number
+    launch_number = instance.launch.number 
+    filename = f"{timestamp}-{launch_number}"
+    return f"vessels/{filename}/{filename}"
+
+def vessel_file_path(instance, filename):
+    timestamp = timezone.now().strftime('%d%m%Y')
+    launch_number = instance.vessel.launch.number 
     filename = f"{timestamp}-{launch_number}"
     return f"vessels/{filename}/{filename}"
 
 def booking_file_path(instance, filename):
     timestamp = timezone.now().strftime('%d%m%Y')
-    launch_number = instance.vessel.launch.number
+    launch_number = instance.vessel.launch.number 
     filename = f"{timestamp}-{launch_number}"
     return f"vessels/booking/{filename}/{filename}"
 
@@ -216,7 +222,7 @@ class VesselParking(models.Model):
     amount = models.DecimalField(max_digits=8, decimal_places=2)
     date = models.DateTimeField(auto_created=True, auto_now_add=True)
     done_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    file = models.FileField(upload_to=generate_file_path, null=True,blank=True)
+    file = models.FileField(upload_to=vessel_file_path, null=True,blank=True)
     note = models.TextField(null=True,blank=True)
 
     def __str__(self):
@@ -241,7 +247,7 @@ class VesselExpenses(models.Model):
     amount  = models.DecimalField(max_digits=8, decimal_places=2)
     date    = models.DateTimeField(auto_created=True, auto_now_add=True)
     done_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    file    = models.FileField(upload_to=generate_file_path, null=True,blank=True)
+    file    = models.FileField(upload_to=vessel_file_path, null=True,blank=True)
     note    = models.TextField(null=True,blank=True)
 
     def __str__(self):
@@ -260,7 +266,7 @@ class VesselExit(models.Model):
     amount = models.DecimalField(max_digits=8, decimal_places=2)
     date = models.DateTimeField(auto_created=True, auto_now_add=True)
     done_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    file = models.FileField(upload_to=generate_file_path, null=True,blank=True)
+    file = models.FileField(upload_to=vessel_file_path, null=True,blank=True)
     note = models.TextField(null=True,blank=True)
 
     def __str__(self):
@@ -276,7 +282,7 @@ class VesselManifest(models.Model):
     amount = models.DecimalField(max_digits=8, decimal_places=2)
     date = models.DateTimeField(auto_created=True, auto_now_add=True)
     done_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    file = models.FileField(upload_to=generate_file_path, null=True,blank=True)
+    file = models.FileField(upload_to=vessel_file_path, null=True,blank=True)
     note = models.TextField(null=True,blank=True)
 
     def __str__(self):
@@ -292,7 +298,7 @@ class VesselAttestation(models.Model):
     amount = models.DecimalField(max_digits=8, decimal_places=2)
     date = models.DateTimeField(auto_created=True, auto_now_add=True)
     done_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    file = models.FileField(upload_to=generate_file_path, null=True,blank=True)
+    file = models.FileField(upload_to=vessel_file_path, null=True,blank=True)
     note = models.TextField(null=True,blank=True)
 
     def __str__(self):
@@ -309,7 +315,7 @@ class VesselAmend(models.Model):
     amount = models.DecimalField(max_digits=8, decimal_places=2)
     date = models.DateTimeField(auto_created=True, auto_now_add=True)
     done_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    file = models.FileField(upload_to=generate_file_path, null=True,blank=True)
+    file = models.FileField(upload_to=vessel_file_path, null=True,blank=True)
     note = models.TextField(null=True,blank=True)
 
     def __str__(self):
@@ -325,7 +331,7 @@ class VesselTrueCopy(models.Model):
     amount = models.DecimalField(max_digits=8, decimal_places=2)
     date = models.DateTimeField(auto_created=True, auto_now_add=True)
     done_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    file = models.FileField(upload_to=generate_file_path, null=True,blank=True)
+    file = models.FileField(upload_to=vessel_file_path, null=True,blank=True)
     note = models.TextField(null=True,blank=True)
 
     def __str__(self):
@@ -345,7 +351,7 @@ class VesselHamali(models.Model):
     ctn_fees = models.DecimalField(default=265,max_digits=8, decimal_places=2)  # the per ctn fees 
     date = models.DateTimeField(auto_created=True, auto_now_add=True) 
     done_by = models.ForeignKey(User,related_name='done_by', on_delete=models.CASCADE)
-    file = models.FileField(upload_to=generate_file_path, null=True,blank=True)
+    file = models.FileField(upload_to=vessel_file_path, null=True,blank=True)
     note = models.TextField(null=True,blank=True)
     paid_amount = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)  # the per ctn fees 
     is_paid = models.BooleanField(default=False)  # the per ctn fees 
@@ -370,10 +376,11 @@ class VesselAccount(models.Model):
     amount  = models.DecimalField(max_digits=8, decimal_places=2)
     date    = models.DateTimeField(auto_created=True, auto_now_add=True)
     done_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    file    = models.FileField(upload_to=generate_file_path, null=True,blank=True)
+    file    = models.FileField(upload_to=vessel_file_path, null=True,blank=True)
     note    = models.TextField(null=True,blank=True)
 
     def __str__(self):
+
         return self.vessel.launch.number
 
     def getDoneByName(self, *args, **kwargs):
@@ -413,7 +420,7 @@ class VesselDiscount(models.Model):
     amount  = models.DecimalField(max_digits=8, decimal_places=2)
     date    = models.DateTimeField(auto_created=True, auto_now_add=True)
     done_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    file    = models.FileField(upload_to=generate_file_path, null=True, blank=True)
+    file    = models.FileField(upload_to=vessel_file_path, null=True, blank=True)
     note    = models.TextField(null=True, blank=True)
 
     def __str__(self):

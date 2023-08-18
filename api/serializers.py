@@ -175,7 +175,6 @@ class VesselAccountSerializer(serializers.HyperlinkedModelSerializer):
     def create(self, validated_data):
         file = validated_data.pop('file', None)
         acc = super().create(validated_data)
-        
         if file:
             acc.file = file
             acc.save()
