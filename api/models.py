@@ -172,44 +172,38 @@ class Vessel(models.Model):
             return 0
         return balance 
 
-    # def total_hamal_fees(self):
-    #     res = 0
-    #     for loading in self.hammal_set.all():
-    #         res +=loading.hamalFee()
-    #     return res
+    def total_hamal_fees(self):
+        res = 0
+        for loading in self.vesselhamali_set.all():
+            res +=loading.getHamalFees()
+        return res
     
-    # def get_total_transites_amount(self):
-    #     transites = Transites.objects.filter(vessel=self)
-    #     total_amount = transites.aggregate(Sum('amount'))['amount__sum']
-    #     return total_amount if total_amount else 0
+    def get_total_trans_fees(self):
+        transites = VesselBooking.objects.filter(vessel=self)
+        total_amount = transites.aggregate(Sum('amount'))['amount__sum']
+        return total_amount if total_amount else 0
+    
+    def get_total_trans_sell(self):
+        transites = VesselBooking.objects.filter(vessel=self)
+        total_amount = transites.aggregate(Sum('amount_paid'))['amount_paid__sum']
+        return total_amount if total_amount else 0
 
-    # def get_alamwaj_transites_fee(self):
-    #     transites = Transites.objects.filter(vessel=self, booked_by='alamwaj')
-    #     local_tax_fee = 125
-    #     transite_fee = 295
-    #     total_fee = 0
-    #     for t in transites:
-    #         if t.type == 'local' or t.type == 'tax':
-    #             total_fee += local_tax_fee
-    #         elif t.type == 'transite':
-    #             total_fee += transite_fee
 
-    #     return total_fee if total_fee else 0
     
     def get_profit(self):
         total_manifestations = self.total_manifestation()
         total_expense = self.total_expenses()
-        # total_hamali = self.total_hamal_fees()
-        # total_booking = self.get_alamwaj_transites_fee()
+        total_hamali = self.total_hamal_fees()
+        total_booking = self.get_total_trans_fees()
         
-        # total_tansite_sell = self.get_total_transites_amount()
+        total_tansite_sell = self.get_total_trans_sell()
         total_receivees = self.total_receivees()
 
-        profit = ( #decimal.Decimal(str(total_tansite_sell)) + 
+        profit = ( decimal.Decimal(str(total_tansite_sell)) + 
                 decimal.Decimal(str(total_receivees))) - (
-                # decimal.Decimal(str(total_booking))  + 
+                decimal.Decimal(str(total_booking))  + 
                 decimal.Decimal(str(total_expense)) + 
-                # decimal.Decimal(str(total_hamali)) +  
+                decimal.Decimal(str(total_hamali)) +  
                 decimal.Decimal(str(total_manifestations)))
         
         return profit if profit else 0

@@ -40,6 +40,7 @@ class VesselSerializer(serializers.HyperlinkedModelSerializer):
         model = models.Vessel
         fields = ['pk','url','date','captain','captainNumber', 'get_balance','total_discount',
                   'total_manifestation', 'total_expenses','get_extra_parking','get_profit',
+                  'total_hamal_fees','get_total_trans_fees','get_total_trans_sell','get_profit',
                   'owner','ownerNumber','sourcePort','DestinationPort', 'total_receivees',
                   'status','agenty','file','launch', 'getTotalBalance','getLaunchNumber','mathrahani','exitReport']
 
