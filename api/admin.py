@@ -17,5 +17,10 @@ admin.site.register(models.UserReceiveAccount)
 admin.site.register(models.UserExpenseAccount)
 admin.site.register(models.VesselBooking)
 admin.site.register(models.VesselDiscount)
-admin.site.register(models.HS_codes)
+
+class AdminHSCode(admin.ModelAdmin):
+    list_display = ["code", "description"]
+admin.site.register(models.HS_codes, AdminHSCode)
+
+
 admin.site.register(models.Company)
