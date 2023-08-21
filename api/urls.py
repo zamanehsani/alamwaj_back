@@ -77,6 +77,10 @@ urlpatterns = [
     path('vessel-account-month/', views.VesselAccountMonth.as_view({'get':'list'}), name='vessel_account_month'),
     path('user-expense-month/', views.UserExpenseMonth.as_view({'get':'list'}), name='vessel_expense_month'),
     path('user-receive-month/', views.UserReceiveMonth.as_view({'get':'list'}), name='user_receive_month'),
+    path('loading-month/', views.LoadingMonth.as_view({'get':'list'}), name='loading_month'),
+    path('booking-month/', views.BookingMonth.as_view({'get':'list'}), name='booking_month'),
+    path('transite-sell-month/', views.TransiteSellMonth.as_view({'get':'list'}), name='transite_sell_month'),
+
     path('launch-vessel-list/', views.LaunchVesselList.as_view({'get':'list'}), name='launch_vessel_list'),
     path('vessel-exit/', views.Exitvessel, name='exit_vessel'),
 

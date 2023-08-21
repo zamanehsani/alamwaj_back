@@ -549,6 +549,51 @@ class UserExpenseMonth(viewsets.ModelViewSet):
 
         return queryset
     
+class LoadingMonth(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselHamaliSerializer
+    queryset = models.VesselHamali.objects.all()
+
+    def get_queryset(self):
+        queryset = self.queryset
+        if self.request.query_params.get('usr'):
+            queryset = queryset.filter(done_by=self.request.query_params.get('usr'))
+        if self.request.query_params.get('yr'):
+            queryset = queryset.filter(date__year = self.request.query_params.get('yr'))
+        if self.request.query_params.get('mth') :
+            queryset = queryset.filter(date__month = self.request.query_params.get('mth'))
+
+        return queryset
+    
+class BookingMonth(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselBookingSerializer
+    queryset = models.VesselBooking.objects.filter(amount__gt=0)
+
+    def get_queryset(self):
+        queryset = self.queryset
+        if self.request.query_params.get('usr'):
+            queryset = queryset.filter(done_by=self.request.query_params.get('usr'))
+        if self.request.query_params.get('yr'):
+            queryset = queryset.filter(date__year = self.request.query_params.get('yr'))
+        if self.request.query_params.get('mth') :
+            queryset = queryset.filter(date__month = self.request.query_params.get('mth'))
+
+        return queryset
+    
+class TransiteSellMonth(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselBookingSerializer
+    queryset = models.VesselBooking.objects.filter(paid = True)
+
+    def get_queryset(self):
+        queryset = self.queryset
+        if self.request.query_params.get('usr'):
+            queryset = queryset.filter(received_by=self.request.query_params.get('usr'))
+        if self.request.query_params.get('yr'):
+            queryset = queryset.filter(date__year = self.request.query_params.get('yr'))
+        if self.request.query_params.get('mth') :
+            queryset = queryset.filter(date__month = self.request.query_params.get('mth'))
+
+        return queryset
+    
 class UserReceiveMonth(viewsets.ModelViewSet):
     serializer_class = serializers.UserReceiveSerializer
     queryset = models.UserReceiveAccount.objects.all()
