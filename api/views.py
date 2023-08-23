@@ -15,7 +15,7 @@ from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.views.generic import ListView
-
+from django.conf import settings
 
 class LaunchSearchViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.LaunchSerializer
@@ -107,7 +107,7 @@ def Exitvessel(request):
             # Send an email with the attached PDF  
             subject = 'Vessel Exit Report'
             message = f"Vessel {obj} has been exited. \nPlease see attached file the report."
-            from_email = 'aldeyarbakery@gmail.com'
+            from_email = settings.EMAIL_HOST_USER
             recipient_list = ['zamanehsani@gmail.com']
             email = EmailMessage(subject, message, from_email, recipient_list)
             email.attach(pdf_filename, pdf_content, "application/pdf")

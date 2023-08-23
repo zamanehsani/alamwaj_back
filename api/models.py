@@ -7,6 +7,8 @@ import decimal
 class Usr(models.Model):
     type = models.CharField(max_length=30,null=True,blank=True)
     user = models.OneToOneField(User,on_delete=models.CASCADE)
+    daily_report = models.BooleanField(default=False, null=True, blank=True)
+    
     def __str__(self):
         return str(self.user)
     def getUsername(self):
