@@ -145,7 +145,7 @@ def start():
     # Remove all missed jobs before adding new ones
     scheduler.remove_all_jobs()
     # run this job every 24 hours
-    scheduler.add_job(daily_breif, 'interval',hour=1, minute=0, name='daily_report', jobstore='default')
+    scheduler.add_job(daily_breif, 'interval',hours=1, name='daily_report', jobstore='default')
     # Schedule the job using the "cron" trigger with hours and minutes set to 0
 
     # from apscheduler.triggers.cron import CronTrigger
