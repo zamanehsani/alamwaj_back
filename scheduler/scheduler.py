@@ -8,6 +8,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.models import User
 
+ 
 # Function to send the VesselExpenses objects as an email
 def daily_report_email(vesselExpense, vesselAccount, userExpense,userReceive,
                         vesselExit, vesselParking, vesselTrueCopy, vesselAttest, 
