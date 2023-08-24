@@ -478,6 +478,21 @@ class TrueCopyMonthView(viewsets.ModelViewSet):
 
         return queryset
     
+class ManifestMonthView(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselManifestSerializer
+    queryset = models.VesselManifest.objects.all()
+
+    def get_queryset(self):
+        queryset = self.queryset
+        if self.request.query_params.get('usr'):
+            queryset = queryset.filter(done_by=self.request.query_params.get('usr'))
+        if self.request.query_params.get('yr'):
+            queryset = queryset.filter(date__year = self.request.query_params.get('yr'))
+        if self.request.query_params.get('mth') :
+            queryset = queryset.filter(date__month = self.request.query_params.get('mth'))
+
+        return queryset
+    
 class ExpensesMonthView(viewsets.ModelViewSet):
     serializer_class = serializers.VesselExpenseSerializer
     queryset = models.VesselExpenses.objects.all()

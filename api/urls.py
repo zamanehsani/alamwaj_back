@@ -72,6 +72,7 @@ urlpatterns = [
     path('exit-month/', views.ExitMonthView.as_view({'get':'list'}), name='exit_month'),
     path('attest-month/', views.AttestationMonthView.as_view({'get':'list'}), name='attest_month'),
     path('true-copy-month/', views.TrueCopyMonthView.as_view({'get':'list'}), name='true_copy_month'),
+    path('manifest-month/', views.ManifestMonthView.as_view({'get':'list'}), name='manifest_month'),
     path('amend-month/', views.AmendMonthView.as_view({'get':'list'}), name='amend_month'),
     path('expense-month/', views.ExpensesMonthView.as_view({'get':'list'}), name='expense_month'),
     path('vessel-account-month/', views.VesselAccountMonth.as_view({'get':'list'}), name='vessel_account_month'),
