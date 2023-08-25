@@ -579,6 +579,21 @@ class LoadingMonth(viewsets.ModelViewSet):
 
         return queryset
     
+class LoadingHamalMonth(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselHamaliSerializer
+    queryset = models.VesselHamali.objects.filter(is_paid = True)
+
+    def get_queryset(self):
+        queryset = self.queryset
+        if self.request.query_params.get('usr'):
+            queryset = queryset.filter(hamal=self.request.query_params.get('usr'))
+        if self.request.query_params.get('yr'):
+            queryset = queryset.filter(date__year = self.request.query_params.get('yr'))
+        if self.request.query_params.get('mth') :
+            queryset = queryset.filter(date__month = self.request.query_params.get('mth'))
+
+        return queryset
+    
 class BookingMonth(viewsets.ModelViewSet):
     serializer_class = serializers.VesselBookingSerializer
     queryset = models.VesselBooking.objects.filter(amount__gt=0)
