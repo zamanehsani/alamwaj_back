@@ -566,7 +566,7 @@ class UserExpenseMonth(viewsets.ModelViewSet):
     
 class LoadingMonth(viewsets.ModelViewSet):
     serializer_class = serializers.VesselHamaliSerializer
-    queryset = models.VesselHamali.objects.all()
+    queryset = models.VesselHamali.objects.filter(is_paid = True)
 
     def get_queryset(self):
         queryset = self.queryset
