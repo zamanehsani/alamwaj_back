@@ -349,6 +349,7 @@ class VesselHamali(models.Model):
     done_by = models.ForeignKey(User,related_name='done_by', on_delete=models.CASCADE)
     file = models.FileField(upload_to=vessel_file_path, null=True,blank=True)
     note = models.TextField(null=True,blank=True)
+    extra_expense = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)   # extra expense for hamali
     paid_amount = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)  # the per ctn fees 
     is_paid = models.BooleanField(default=False)  # the per ctn fees 
 

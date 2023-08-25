@@ -155,7 +155,7 @@ class VesselHamaliSerializer(serializers.HyperlinkedModelSerializer):
     file = serializers.FileField(required=False)
     class Meta:
         model = models.VesselHamali
-        fields = ['pk','url','hamal','hamal_loaded','container','ctn_fees',
+        fields = ['pk','url','hamal','hamal_loaded','container','ctn_fees','extra_expense',
                   'getHamalFees', 'getHamalName', 'is_paid', 'paid_amount',
                   'vessel','done_by','note','file','date', 'getDoneByName', 'getVesselNumber']
     def create(self, validated_data):
