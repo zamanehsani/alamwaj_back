@@ -53,8 +53,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'storages',
-    'django_apscheduler',
 ]
+
+
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -103,6 +104,17 @@ DATABASES = {
         # 'PORT': os.getenv('DB_PORT'),
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'testing',       # Database name
+#         'USER': 'postgres',  # Database username
+#         'PASSWORD': 'A2022a@98computer', # Database password (if set)
+#         'HOST': 'localhost',     # Database host
+#         'PORT': '5432',          # Database port
+#     }
+# }
 
 # CORS_ALLOWED_ORIGINS = [
 #     'http://127.0.0.1:3000',  

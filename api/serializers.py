@@ -3,16 +3,46 @@ from rest_framework import  serializers
 from api import models
 from datetime import datetime
 # Serializers define the API representation.
+from django.db import transaction
+
 
 class UsrSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Usr
-        fields = ('type',)
+        fields = ('type','pk')
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     usr = UsrSerializer()
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'email','url', 'is_staff', 'is_active','usr']
+        fields = ['first_name', 'pk', 'last_name', 'username', 'email','url', 'is_staff', 'is_active','usr']
+    
+    def create(self, validated_data):
+        usr_data = validated_data.pop('usr', None)  # handle nested data
+        usr_type = usr_data.pop('type', None) if usr_data else None
+        with transaction.atomic():
+            user = User.objects.create(**validated_data)  # use ** to unpack
+            if usr_type:
+                models.Usr.objects.create(user=user, type=usr_type)   
+        return user
+    
+    def update(self, instance, validated_data):
+        usr_data = validated_data.pop('usr', None)
+        
+        # Update User fields
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+
+        # Update Usr fields if usr_data is provided
+        if usr_data:
+            usr = instance.usr
+            for attr, value in usr_data.items():
+                setattr(usr, attr, value)
+            usr.save()
+
+        return instance
+
 
 class UserDetailsSerializer(serializers.ModelSerializer):
     usr = UsrSerializer()

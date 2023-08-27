@@ -17,6 +17,7 @@ from rest_framework.response import Response
 from django.views.generic import ListView
 from django.conf import settings
 
+
 class LaunchSearchViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.LaunchSerializer
     queryset = models.Launch.objects.all()
