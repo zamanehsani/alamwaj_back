@@ -63,8 +63,14 @@ class LaunchViewSet(viewsets.ModelViewSet):
     queryset = models.Launch.objects.all().order_by('number')
     serializer_class = serializers.LaunchSerializer
 
-class VesselViewSet(viewsets.ModelViewSet):
+
+class CurrentVesselViewSet(viewsets.ModelViewSet):
     queryset = models.Vessel.objects.filter(~Q(status = 'exit')).order_by('launch__number')
+    serializer_class = serializers.VesselSerializer
+    parser_classes = [MultiPartParser]
+
+class VesselViewSet(viewsets.ModelViewSet):
+    queryset = models.Vessel.objects.all().order_by('launch__number')
     serializer_class = serializers.VesselSerializer
     parser_classes = [MultiPartParser]
 
@@ -722,7 +728,7 @@ class CompanyViewSet(viewsets.ModelViewSet):
 class PendingBalanceVessels(viewsets.ModelViewSet):
     serializer_class = serializers.VesselSerializer
     queryset = models.Vessel.objects.filter(status='exit')
-
+    pagination_class = TransitePagination
     def get_queryset(self):
         queryset = super().get_queryset()
 
