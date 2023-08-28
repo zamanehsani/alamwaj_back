@@ -111,7 +111,8 @@ def Exitvessel(request):
             subject = 'Vessel Exit Report'
             message = f"Vessel {obj} has been exited. \nPlease see attached file the report."
             from_email = settings.EMAIL_HOST_USER
-            recipient_list = ['zamanehsani@gmail.com']
+            users_emails = User.objects.filter(usr__vessel_exit_report=True).values_list('email', flat=True)
+            recipient_list = list(users_emails)
             email = EmailMessage(subject, message, from_email, recipient_list)
             email.attach(pdf_filename, pdf_content, "application/pdf")
             email.send()

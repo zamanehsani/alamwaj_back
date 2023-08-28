@@ -25,7 +25,7 @@ def generate_pdf(vessel_instance):
         'Agenty': vessel_instance.agenty,
         ':.........................................':'',
         'Total Balance': vessel_instance.getTotalBalance(),
-        'Discounted': 'not yet make',
+        'Discounted': vessel_instance.total_discount() or 'No Discount',
         'Extra Parking': vessel_instance.get_extra_parking(),
         'Pending Balance': vessel_instance.get_balance(),
 
