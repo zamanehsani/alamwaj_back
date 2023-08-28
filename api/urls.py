@@ -82,8 +82,8 @@ urlpatterns = [
     path('loading-hamal-month/', views.LoadingHamalMonth.as_view({'get':'list'}), name='loading_hamal_month'),
     path('booking-month/', views.BookingMonth.as_view({'get':'list'}), name='booking_month'),
     path('transite-sell-month/', views.TransiteSellMonth.as_view({'get':'list'}), name='transite_sell_month'),
-
     path('launch-vessel-list/', views.LaunchVesselList.as_view({'get':'list'}), name='launch_vessel_list'),
     path('vessel-exit/', views.Exitvessel, name='exit_vessel'),
+    path('balance-pending-vessels/', views.PendingBalanceVessels.as_view({'get':'list'}), name='balance_pending_vessel'),
 
 ]

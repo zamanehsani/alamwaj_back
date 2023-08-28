@@ -16,7 +16,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.views.generic import ListView
 from django.conf import settings
-
+from django.utils import timezone
 
 class LaunchSearchViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.LaunchSerializer
@@ -100,6 +100,7 @@ def Exitvessel(request):
             obj = models.Vessel.objects.filter(pk = vessel).filter(~Q(status = 'exit')).first()
             obj.status = 'exit'
             obj.exit_note = note
+            obj.exit_date = timezone.now()
            
              # Generate the PDF content
             pdf_filename = f'vessel_report_{obj.pk}.pdf'
@@ -718,3 +719,14 @@ class CompanyViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.CompanySerializer
     queryset = models.Company.objects.all()
 
+class PendingBalanceVessels(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselSerializer
+    queryset = models.Vessel.objects.filter(status='exit')
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        # Filter based on the get_balance() method
+        queryset = [vessel for vessel in queryset if vessel.get_balance() > 0]
+
+        return queryset
