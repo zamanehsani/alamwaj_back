@@ -86,5 +86,6 @@ urlpatterns = [
     path('vessel-exit/', views.Exitvessel, name='exit_vessel'),
     path('balance-pending-vessels/', views.PendingBalanceVessels.as_view({'get':'list'}), name='balance_pending_vessel'),
     path('current-vessels/', views.CurrentVesselViewSet.as_view({'get':'list'}), name='current_vessel'),
+    path('daily-report/', views.daily_report, name='daily_report'),
 
 ]

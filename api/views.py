@@ -736,3 +736,134 @@ class PendingBalanceVessels(viewsets.ModelViewSet):
         queryset = [vessel for vessel in queryset if vessel.get_balance() > 0]
 
         return queryset
+    
+
+def daily_report(request):
+    if request.method == 'GET':
+        # Retrieve user from User model using the username
+        print("sending daily report")
+        try:
+            current_date = timezone.now().date()
+            # Calculate the start and end of the current day
+            start_of_day = timezone.make_aware(timezone.datetime(current_date.year, current_date.month, current_date.day))
+            end_of_day = start_of_day + timezone.timedelta(days=1)
+
+            # Send an email with the attached PDF  
+            subject = 'Daily Report'
+            message = f"This is the Report of {timezone.now().strftime('%B %d, %Y')}:\n\n"
+            # list the users recieves. 
+
+            users_rec = models.UserReceiveAccount.objects.filter(date__range=(start_of_day, end_of_day))
+            if users_rec:
+                message += 'User Accounts Receivings:\n'
+                for index, obj in enumerate(users_rec, start=1):
+                    message += f"   {index}. {obj.done_by} received {obj.amount} AED.\n"
+                message += '\n'
+
+            users_pay = models.UserExpenseAccount.objects.filter(date__range=(start_of_day, end_of_day))
+            if users_pay:
+                message += 'Users Spendings:\n'
+                for index, obj in enumerate(users_pay, start=1):
+                    message += f"   {index}. {obj.done_by} paid {obj.amount} AED.\n"
+                message += '\n'
+
+            vessel_balances = models.VesselAccount.objects.filter(date__range=(start_of_day, end_of_day))
+            if vessel_balances:
+                message += 'Vessel Balances:\n'
+                for index, obj in enumerate(vessel_balances, start=1):
+                    message += f"   {index}. {obj.done_by} received {obj.amount} AED from {obj.getVesselNumber()}.\n"
+                message += '\n'
+
+            transit_sells = models.VesselBooking.objects.filter(pay_date__range=(start_of_day, end_of_day)).filter(paid = True)
+            if transit_sells:
+                message += 'Transite Sells:\n'
+                for index, obj in enumerate(transit_sells, start=1):
+                    message += f"   {index}. {obj.received_by} sold one {obj.type} of {obj.company} for {obj.amount_paid} AED  of vessel {obj.getVessel()}.\n"
+                message += '\n'
+
+            booking = models.VesselBooking.objects.filter(date__range=(start_of_day, end_of_day))
+            if booking:
+                message += 'Bookings:\n'
+                for index, obj in enumerate(booking, start=1):
+                    message += f"   {index}. {obj.done_by} has booked a {obj.type} of {obj.company} for {(obj.amount or 0)} AED  of vessel {obj.getVessel()}.\n"
+                message += '\n'
+                
+
+            discounts = models.VesselDiscount.objects.filter(date__range=(start_of_day, end_of_day))
+            if booking:
+                message += 'Discounts:\n'
+                for index, obj in enumerate(discounts, start=1):
+                    message += f"   {index}. {obj.done_by} gave a discount of {obj.amount} AED for vessel {obj.getVessel()}.\n"
+                message += '\n'
+
+            hamali = models.VesselHamali.objects.filter(date__range=(start_of_day, end_of_day))
+            if hamali:
+                message += 'Loadings:\n'
+                for index, obj in enumerate(hamali, start=1):
+                    message += f"   {index}. vessel {obj.getVesselNumber()} was loaded {obj.container} CTNs totally. {obj.getHamalName()} loaded {obj.hamal_loaded} CTNs. Hamal's fees is {obj.getHamalFees()} AED.\n"
+                message += '\n'
+
+            hamali_payments = models.VesselHamali.objects.filter(date__range=(start_of_day, end_of_day))
+            if hamali_payments:
+                message += 'Loading Payments:\n'
+                for index, obj in enumerate(hamali_payments, start=1):
+                    if obj.is_paid:
+                        message += f"   {index}. {obj.done_by} paid {(obj.paid_amount or 0) + (obj.extra_expense or 0)} AED to {obj.getHamalName()} for loading of vessel {obj.getVesselNumber()}.\n"
+                        message += '\n'
+
+            message += 'Manifestations:\n'
+            counter = 1
+            tru_copies = models.VesselTrueCopy.objects.filter(date__range=(start_of_day, end_of_day))
+            if tru_copies:
+                for index, obj in enumerate(tru_copies, start=1):
+                    message += f"   {counter}. {obj.done_by} paid {obj.amount} AED for true copy of vessel {obj.getVessel()}.\n"
+                    counter +=1
+
+            amends = models.VesselAmend.objects.filter(date__range=(start_of_day, end_of_day))
+            if amends:
+                for index, obj in enumerate(amends, start=1):
+                    message += f"   {counter}. {obj.done_by} paid  {obj.amount} AED for amendment of vessel {obj.getVessel()}.\n"
+                    counter +=1
+
+            attest = models.VesselAttestation.objects.filter(date__range=(start_of_day, end_of_day))
+            if attest:
+                for index, obj in enumerate(attest, start=1):
+                    message += f"   {index+1}. {obj.done_by} paid  {obj.amount} AED for attestation of vessel {obj.getVessel()}.\n"
+                    counter +=1
+
+            manifest = models.VesselManifest.objects.filter(date__range=(start_of_day, end_of_day))
+            if manifest:
+                for index, obj in enumerate(manifest, start=1):
+                    message += f"   {index+1}. {obj.done_by} paid  {obj.amount} AED for manifest of vessel {obj.getVessel()}.\n"
+                    counter +=1
+
+            exit = models.VesselExit.objects.filter(date__range=(start_of_day, end_of_day))
+            if exit:
+                for index, obj in enumerate(exit, start=1):
+                    message += f"   {counter}. {obj.done_by} paid  {obj.amount} AED for exit of vessel {obj.getVessel()}.\n"
+                    counter +=1
+
+            parking = models.VesselParking.objects.filter(date__range=(start_of_day, end_of_day))
+            if parking:
+                for index, obj in enumerate(parking, start=1):
+                    message += f"   {counter}. {obj.done_by} paid  {obj.amount} AED for {obj.days} day(s) parking of vessel {obj.getVessel()}.\n"
+                    counter +=1
+
+            expense = models.VesselExpenses.objects.filter(date__range=(start_of_day, end_of_day))
+            if expense:
+                message += '\nMachella:\n'
+                for index, obj in enumerate(expense, start=1):
+                    message += f"   {index}. {obj.done_by} paid  {obj.amount} AED for vessel {obj.getVessel()}.\n"
+                message += '\n'
+            
+
+            from_email = settings.EMAIL_HOST_USER
+            users_emails = User.objects.filter(usr__daily_report=True).values_list('email', flat=True)
+            recipient_list = list(users_emails)
+            email = EmailMessage(subject, message, from_email, recipient_list)
+            email.send()
+            return JsonResponse({'status': 'sent'})
+        except:
+            return JsonResponse({'err':'something went wrong.'}, status=400)
+    else:
+        return JsonResponse({'error': 'Invalid request method'}, status=400)
