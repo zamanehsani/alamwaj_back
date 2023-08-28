@@ -95,9 +95,11 @@ class VesselViewSet(viewsets.ModelViewSet):
 def Exitvessel(request):
     if request.method == 'POST':
         vessel = request.POST.get("vessel")
+        note = request.POST.get("exit_note")
         try:
             obj = models.Vessel.objects.filter(pk = vessel).filter(~Q(status = 'exit')).first()
             obj.status = 'exit'
+            obj.exit_note = note
            
              # Generate the PDF content
             pdf_filename = f'vessel_report_{obj.pk}.pdf'

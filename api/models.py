@@ -80,6 +80,7 @@ class Vessel(models.Model):
     file = models.FileField(upload_to=generate_file_path, null=True,blank=True)
     mathrahani = models.FileField(upload_to=mathrahani_file, null=True,blank=True)
     exitReport = models.FileField(upload_to=exitReport_file_path, null=True,blank=True)
+    exit_note = models.TextField(blank=True, null=True)
     
     def __str__(self):
         return self.launch.number
