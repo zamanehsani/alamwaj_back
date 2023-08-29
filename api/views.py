@@ -692,7 +692,7 @@ class TransitePagination(PageNumberPagination):
 
 class TransitesViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.VesselBookingSerializer
-    queryset = models.VesselBooking.objects.filter(paid=False).filter(final_stamp = True)
+    queryset = models.VesselBooking.objects.filter(paid=False).filter(final_stamp = True).filter(~Q(type='local')).order_by('date')
     pagination_class = TransitePagination
 
 
@@ -867,3 +867,9 @@ def daily_report(request):
             return JsonResponse({'err':'something went wrong.'}, status=400)
     else:
         return JsonResponse({'error': 'Invalid request method'}, status=400)
+    
+
+class UnStampedTransites(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselBookingSerializer
+    queryset = models.VesselBooking.objects.filter(paid=False).filter(final_stamp=False).filter(vessel__status = 'exit').order_by('date')
+    pagination_class = TransitePagination
