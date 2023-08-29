@@ -873,3 +873,15 @@ class UnStampedTransites(viewsets.ModelViewSet):
     serializer_class = serializers.VesselBookingSerializer
     queryset = models.VesselBooking.objects.filter(paid=False).filter(final_stamp=False).filter(vessel__status = 'exit').order_by('date')
     pagination_class = TransitePagination
+
+
+class VesselSearchViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.VesselSerializer
+    queryset = models.Vessel.objects.filter(~Q(status='exit'))
+    def get_queryset(self):
+        queryset = self.queryset
+        search = self.request.query_params.get('search')
+        if search:
+            # Filter the queryset based on the vessel ID
+            return queryset.filter(launch__number__contains=search)
+        return []

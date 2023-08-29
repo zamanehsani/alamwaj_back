@@ -88,5 +88,6 @@ urlpatterns = [
     path('current-vessels/', views.CurrentVesselViewSet.as_view({'get':'list'}), name='current_vessel'),
     path('daily-report/', views.daily_report, name='daily_report'),
     path('unstamped-transites/', views.UnStampedTransites.as_view({'get':'list'}), name='unstamped_transites'),
+    path('vessel-search/', views.VesselSearchViewSet.as_view({'get':'list'}), name='vessel_search'),
 
 ]
