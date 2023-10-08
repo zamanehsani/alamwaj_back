@@ -1,0 +1,14 @@
+ALAMWAJDB is the main db file. take a copy of this once each month. 
+the static folder is moved one level back to root dir. 
+the ALAMWAJDB is also moved a level back to main root dir. 
+the static and db file is not in git control. it is risky and ok
+
+Database is a file in the root dir of the EC2 instance called ALAMWAJDB. Please make a copy of this fil
+every once and than
+
+the static folder is ownership is changed to www-dat user of nginx.
+to update the static folder into ubuntu to update
+
+
+
+ 
