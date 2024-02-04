@@ -1,2 +1,4 @@
-# alamwaj_back
-This is the back end of Alamwaj appliction. built with django restframe work. 
+## alamwaj_backend_services
+This project provides services for Alamwaj and Mezna LLC. 
+
+For any questions and inquiries, please contact me personally. 
